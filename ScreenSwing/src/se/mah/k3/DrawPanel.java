@@ -102,8 +102,11 @@ public class DrawPanel extends JPanel implements ThemeInterface{
 	@Override
 	public void updateData(FirebaseData data) {
 		// TODO Auto-generated method stub
+		System.out.println("update data called");
 		question = data.getQuestion();
+		//invalidate();
 		repaint();
+		
 	}
 }
 

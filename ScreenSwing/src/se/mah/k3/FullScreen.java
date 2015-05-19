@@ -52,6 +52,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			panel = new DrawPanel();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
 			break;
 		default:
 			//Empty all old crap

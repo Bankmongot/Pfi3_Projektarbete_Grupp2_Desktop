@@ -32,6 +32,7 @@ public class FireBase {
 		myFirebaseRef.child("ScreamNbr").setValue(235); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
 		fbData = new FirebaseData();
 		
+		
 		 myFirebaseRef.addChildEventListener(new ChildEventListener() {
 			@Override
 			public void onChildRemoved(DataSnapshot arg0) {}
@@ -134,6 +135,7 @@ public class FireBase {
 			//We got a new user
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
+				//This is called the first when opened so lets add something to initiate a call to onChildChanged
 				if (arg0.hasChildren()){
 					//Nothing here, move on..
 				}

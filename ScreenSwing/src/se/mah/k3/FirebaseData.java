@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FirebaseData {
-	private String theme;
-	private String question;
-	private String creator;
-	private String date;
+	private String theme = "Circles";
+	private String question = "-";
+	private String creator = "-";
+	private String date = "_";
 	private HashMap<String, Integer> inData;
 	
 
