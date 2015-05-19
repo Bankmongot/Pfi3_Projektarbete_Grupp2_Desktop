@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
@@ -18,15 +19,17 @@ public class FireBase {
 	private String ID; // To do
 	private FirebaseData fbData;
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();
-	private String theme;
+	private String lastTheme = "Circles";
 	private ThemeInterface themeInterface;
 	
 
 	
 	public FireBase(){
+		themeInterface = FullScreen.setUpTheme("Circles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
-		myFirebaseRef.removeValue(); //Cleans out everything
-		myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);  //Has to be same as on the app. So place specific can't you see the screen you don't know the number
+		//myFirebaseRef.removeValue(); //Cleans out everything
+		myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);
+		myFirebaseRef.child("ScreamNbr").setValue(235); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
 		fbData = new FirebaseData();
 		
 		 myFirebaseRef.addChildEventListener(new ChildEventListener() {
@@ -40,32 +43,33 @@ public class FireBase {
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
 				Iterable<DataSnapshot> dsList = arg0.getChildren();
-				Collections.sort(users);
-				int place = Collections.binarySearch(users, new User(arg0.getKey(),0,0)); //Find the user username has to be unique uses the method compareTo in User
+				//Collections.sort(users);
+				//int place = Collections.binarySearch(users, new User(arg0.getKey(),0,0)); //Find the user username has to be unique uses the method compareTo in User
 				
 				//Snapshot is listening for changes, and getting the data.
 				for (DataSnapshot dataSnapshot : dsList) {
 
 
 					if (dataSnapshot.getKey().equals("Question")){
+						System.out.println("New Question: "+(String)dataSnapshot.getValue());
 						 fbData.setQuestion((String)dataSnapshot.getValue());
 					 }
 					
 					if (dataSnapshot.getKey().equals("Theme")){
-						theme = (String)dataSnapshot.getValue();
-						fbData.setTheme(theme);						// Returns Null ;(
+						System.out.println("New theme: "+(String)dataSnapshot.getValue());
+						fbData.setTheme((String)dataSnapshot.getValue());						// Returns Null ;(
 					}
 					
-					themeInterface = FullScreen.setUpTheme("string");
+					//themeInterface = FullScreen.setUpTheme("string");
 					
 																								//      H  A  S  H  M  A  P
 					/*if (dataSnapshot.getKey().equals("four")){
 						 Map<String, Object> newPost = (Map<String, Object>) arg0.getValue();
 					     System.out.println("Answer: " + newPost.get("alternative"));
 					     System.out.println("Votes: " + newPost.get("votes"));
-					 }
+					 }*/
 					
-					*/
+					//Why don't you add all these below to your object FirebaseData?
 					String alt1 = null;
 					if (dataSnapshot.getKey().equals("Alt1")){
 						 alt1 = (String)dataSnapshot.getValue();
@@ -103,17 +107,28 @@ public class FireBase {
 						 vote4 = ((long)dataSnapshot.getValue()); 
 					}
 					
-					Integer x1 = (int) vote1;
-					Integer x2 = (int) vote2;
-					Integer x3 = (int) vote3;
-					Integer x4 = (int) vote4;
-
-					map.put(alt1, x1);
-					map.put(alt2, x2);
-					map.put(alt3, x3);
-					map.put(alt4, x4);
+					//OK tell the panel that there is data
+					
+//					Integer x1 = (int) vote1;
+//					Integer x2 = (int) vote2;
+//					Integer x3 = (int) vote3;
+//					Integer x4 = (int) vote4;
+//
+//					map.put(alt1, x1);
+//					map.put(alt2, x2);
+//					map.put(alt3, x3);
+//					map.put(alt4, x4);
 					
 				 }
+				
+				//Nu har vi all ny data.
+				//Change screen if there is a new theme
+				if (!lastTheme.equals(fbData.getTheme())){
+					themeInterface = FullScreen.setUpTheme(fbData.getTheme());
+					lastTheme = fbData.getTheme();
+				}
+				//Tell the interface that there are changes
+				themeInterface.updateData(fbData);
 			}
 			
 			//We got a new user

@@ -20,7 +20,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 	private static JPanel contentPane;
 	private boolean inFullScreenMode = false;
 	private int PrevX = 100 ,PrevY = 100 ,PrevWidth = 480,PrevHeight = 640;
-	private static ThemeInterface tInter;
+	//private static ThemeInterface tInter;
 	private FireBase fb;
 
 	/**
@@ -44,17 +44,24 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 	 */
 	
 	public static ThemeInterface setUpTheme(String theme){
+		JPanel panel;
 		switch(theme){
 		case "Circles":
-			DrawPanel panel = new DrawPanel();
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new DrawPanel();
 			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
 			break;
 		default:
-			tInter = new DummyPanel();
-			contentPane.add((Component) tInter, BorderLayout.CENTER);
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new DummyPanel();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
 			break;
 		}
-		return tInter;
+		return (ThemeInterface) panel;
 	}
 	
 	public FullScreen() {
@@ -64,9 +71,11 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		
+		//Show DrawPanel as a start or screensaver
+//		JPanel panel = new DummyPanel();
+//		contentPane.add(panel, BorderLayout.CENTER);
 		fb = new FireBase();
-		
+
 		KeyboardFocusManager manager = KeyboardFocusManager.getCurrentKeyboardFocusManager(); //Listen to keyboard
 	    manager.addKeyEventDispatcher(this);
 		setFullscreen(true);

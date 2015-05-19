@@ -4,7 +4,7 @@ import java.awt.Color;
 
 public class Constants {
 	public static int screenNbr=145;
-	public static String question = "";
+	public static String question = "urk";
 	public static String alt1 = "Alt1";
 	public static String alt2 = "Alt2";
 	public static String alt3 = "Alt3";

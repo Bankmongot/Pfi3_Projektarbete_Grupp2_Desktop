@@ -6,13 +6,16 @@ import javax.swing.JLabel;
 public class DummyPanel extends JPanel implements ThemeInterface {
 	
 	FirebaseData fbData;
+	JLabel lblNewLabel_3;
 
 	public DummyPanel(){
+		System.out.println("Created DummyPanel");
 		setLayout(null);
 		
-		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3 = new JLabel("New label");
 		lblNewLabel_3.setBounds(161, 224, 61, 16);
-		lblNewLabel_3.setText(fbData.getQuestion());
+		lblNewLabel_3.setText("RETA");
+		//lblNewLabel_3.setText(fbData.getQuestion());
 		add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
@@ -34,6 +37,7 @@ public class DummyPanel extends JPanel implements ThemeInterface {
 	public void updateData(FirebaseData data) {
 		// TODO Auto-generated method stub
 		fbData = data;
+		lblNewLabel_3.setText(fbData.getQuestion());
 	}
 	
 	

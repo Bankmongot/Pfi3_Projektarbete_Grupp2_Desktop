@@ -17,17 +17,18 @@ import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
-public class DrawPanel extends JPanel {
+public class DrawPanel extends JPanel implements ThemeInterface{
 	private static final long serialVersionUID = 1L;
 	//A vector is like an ArrayList a little bit slower but Thread-safe. This means that it can handle concurrent changes. 
 	Font font = new Font("Avenir next", Font.BOLD, 40);
-	
+	String question = "Dummy";
 	private int frame = 0;
 	
 
 	
 	
 	public DrawPanel() {
+		System.out.println("Created DrawPanel");
 		
 	}
 	
@@ -49,8 +50,10 @@ public class DrawPanel extends JPanel {
 		
 		g.drawString("Frame: "+frame, 250, 50);
 		
-		g.setColor(Color.black);
-		g.drawString(Constants.question, 100, 50);
+		g.setColor(Color.red);
+		//Lars changes
+		//g.drawString(Constants.question, 100, 50);
+		g.drawString(question, 100, 50);
 		
 		Font fontt = new Font("Avenir next", Font.BOLD, 20);
 		
@@ -90,6 +93,17 @@ public class DrawPanel extends JPanel {
 			 g.setColor(Color.BLACK);
 			 g.drawString(Constants.alt2, 650, 560);
 		
+	}
+
+
+
+
+
+	@Override
+	public void updateData(FirebaseData data) {
+		// TODO Auto-generated method stub
+		question = data.getQuestion();
+		repaint();
 	}
 }
 
