@@ -163,11 +163,14 @@ public class FireBase {
 				
 //SET TIME HERE
 				
-				new Reminder(5);
+				new Reminder(49990);
+	        	myFirebaseRef.child("Active").setValue(true);
+
 				timer.schedule(new TimerTask() {
 					  @Override
 					  public void run() {
 					    // Your database code here
+
 					  }
 					}, 2*60*1000);
 				

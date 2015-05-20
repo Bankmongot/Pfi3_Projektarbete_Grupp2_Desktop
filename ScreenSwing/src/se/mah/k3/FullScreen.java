@@ -49,7 +49,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 		case "Circles":
 			//Empty all old crap
 			contentPane.removeAll();
-			panel = new DrawPanel();
+			panel = new CircleTheme();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
@@ -57,7 +57,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 		default:
 			//Empty all old crap
 			contentPane.removeAll();
-			panel = new DummyPanel();
+			panel = new DummyTheme();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			break;
