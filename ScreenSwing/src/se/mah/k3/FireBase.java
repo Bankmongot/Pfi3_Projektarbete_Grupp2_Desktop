@@ -58,7 +58,7 @@ public class FireBase {
 					
 					if (dataSnapshot.getKey().equals("Theme")){
 						//System.out.println("New theme: "+(String)dataSnapshot.getValue());
-						fbData.setTheme((String)dataSnapshot.getValue());						// Returns Null ;(
+						fbData.setTheme((String)dataSnapshot.getValue());						
 					}
 					
 					//themeInterface = FullScreen.setUpTheme("string");
