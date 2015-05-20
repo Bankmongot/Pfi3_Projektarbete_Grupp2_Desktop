@@ -37,8 +37,8 @@ public class Helpers {
 	 * Räknar ut var en stapel som växewr uppåt ska börja i Y led 
 	 * @param int Tänk dig grafens yta som en rektangel, detta är Y-värdet för det övre vänstra hörnet.
 	 * @param int Tänk dig grafens yta som en rektangel, detta är hur hög den är.
-	 * @param double Detta är 
-	 * @return HashMap<String, Double> få ut procent som decimaltal mellan 0,0 och 1
+	 * @param double Detta är antalet votes i procent som decimaltal mellan 0,0 och 1
+	 * @return float ett yvärde i pixlar
 	 * */
 	public static float getYOrgin(int graphYPos, int graphMaxHeight, double votesInPercent){
 		return (float) ((graphYPos + graphMaxHeight) - (graphMaxHeight * votesInPercent));
