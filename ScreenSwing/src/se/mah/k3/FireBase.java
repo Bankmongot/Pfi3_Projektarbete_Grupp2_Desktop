@@ -6,6 +6,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
 
 import com.firebase.client.ChildEventListener;
@@ -21,6 +23,9 @@ public class FireBase {
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();
 	private String lastTheme = "Circles";
 	private ThemeInterface themeInterface;
+	Timer timer;
+
+
 	
 
 	
@@ -149,11 +154,23 @@ public class FireBase {
 				//Tell the interface that there are changes
 				themeInterface.updateData(fbData);
 			}
+				
 			
 			//We got a new user
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
 				//This is called the first when opened so lets add something to initiate a call to onChildChanged
+				
+//SET TIME HERE
+				
+				new Reminder(5);
+				timer.schedule(new TimerTask() {
+					  @Override
+					  public void run() {
+					    // Your database code here
+					  }
+					}, 2*60*1000);
+				
 				if (arg0.hasChildren()){
 					//Nothing here, move on..
 				}
@@ -165,7 +182,26 @@ public class FireBase {
 				
 			}
 		});
+		
 	}
+	
+	public class Reminder{
+	
+	public Reminder(int seconds) {
+        timer = new Timer();
+        timer.schedule(new RemindTask(), seconds*1000);
+	}
+
+    class RemindTask extends TimerTask {
+        public void run() {
+        	myFirebaseRef.child("Active").setValue(false);
+            System.out.format("Time's up!%n");
+            timer.cancel(); //Terminate the timer thread
+        }
+    }
+    
+	}
+ 
 	
 
 }
