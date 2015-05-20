@@ -28,8 +28,8 @@ public class FireBase {
 		themeInterface = FullScreen.setUpTheme("Circles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
 		//myFirebaseRef.removeValue(); //Cleans out everything
-		myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);
-		myFirebaseRef.child("ScreamNbr").setValue(235); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
+		//myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);
+		myFirebaseRef.child("ScreenNbr").setValue(145); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
 		fbData = new FirebaseData();
 		
 		
@@ -52,25 +52,43 @@ public class FireBase {
 
 
 					if (dataSnapshot.getKey().equals("Question")){
-						System.out.println("New Question: "+(String)dataSnapshot.getValue());
+						//System.out.println("New Question: "+(String)dataSnapshot.getValue());
 						 fbData.setQuestion((String)dataSnapshot.getValue());
 					 }
 					
 					if (dataSnapshot.getKey().equals("Theme")){
-						System.out.println("New theme: "+(String)dataSnapshot.getValue());
+						//System.out.println("New theme: "+(String)dataSnapshot.getValue());
 						fbData.setTheme((String)dataSnapshot.getValue());						// Returns Null ;(
 					}
 					
 					//themeInterface = FullScreen.setUpTheme("string");
 					
 																								//      H  A  S  H  M  A  P
-					/*if (dataSnapshot.getKey().equals("four")){
+					if (dataSnapshot.getKey().equals("four")){
 						 Map<String, Object> newPost = (Map<String, Object>) arg0.getValue();
-					     System.out.println("Answer: " + newPost.get("alternative"));
-					     System.out.println("Votes: " + newPost.get("votes"));
-					 }*/
+						 System.out.println("newPost "+newPost);
+						 // The line above prints: newPost {four={alternative=Monday, votes=0}, Vote1=1, one={alternative=Saturday, votes=0}, Theme=Circles, Vote3=1, Question=Favorite day?, three={alternative=Wensday, votes=0}, two={alternative=Friday, votes=0}}
+					     System.out.println("Answer: " + newPost.get("one")); //This returns a NullPointerExeption
+					     
+					     //How do we reach inside "newPost" values?
+					     //They structure is like this:
+					     /*
+					      * four -> alternative="Monday";
+					      * 		votes=0;
+					      * three-> alternative="Wensday";
+					      * 		vote=0;
+					      * 
+					      *  And so on...
+					      * 
+					      * 
+					      */
+					     
+					     
+					     //System.out.println("Votes: " + newPost.get("votes"));
+					 }
 					
-					//Why don't you add all these below to your object FirebaseData?
+					//Why don't you add all these below to your object FirebaseData? / Lars
+					//This was only for demo, we have Hashmap contaning these values in FirebaseData.    /     Nils
 					String alt1 = null;
 					if (dataSnapshot.getKey().equals("Alt1")){
 						 alt1 = (String)dataSnapshot.getValue();

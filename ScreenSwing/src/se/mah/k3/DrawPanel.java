@@ -53,7 +53,7 @@ public class DrawPanel extends JPanel implements ThemeInterface{
 		g.setColor(Color.red);
 		//Lars changes
 		//g.drawString(Constants.question, 100, 50);
-		g.drawString(question, 100, 50);
+		g.drawString(question, 100, 90);
 		
 		Font fontt = new Font("Avenir next", Font.BOLD, 20);
 		

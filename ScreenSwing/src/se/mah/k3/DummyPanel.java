@@ -6,7 +6,8 @@ import javax.swing.JLabel;
 public class DummyPanel extends JPanel implements ThemeInterface {
 	
 	FirebaseData fbData;
-	JLabel lblNewLabel_3;
+	JLabel lblNewLabel_3, lblNewLabel_1, lblNewLabel_2, lblNewLabel;
+	private int frame = 0;
 
 	public DummyPanel(){
 		System.out.println("Created DummyPanel");
@@ -18,15 +19,16 @@ public class DummyPanel extends JPanel implements ThemeInterface {
 		//lblNewLabel_3.setText(fbData.getQuestion());
 		add(lblNewLabel_3);
 		
-		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(161, 81, 61, 16);
+		lblNewLabel_1.setText("Label 1");
 		add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("New label");
+		lblNewLabel_2 = new JLabel("New label");
 		lblNewLabel_2.setBounds(161, 151, 61, 16);
 		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(161, 33, 61, 16);
 		add(lblNewLabel);
 		
@@ -38,6 +40,9 @@ public class DummyPanel extends JPanel implements ThemeInterface {
 		// TODO Auto-generated method stub
 		fbData = data;
 		lblNewLabel_3.setText(fbData.getQuestion());
+		lblNewLabel_1.setText("Frame: "+frame);
+		frame++;
+		repaint();
 	}
 	
 	
