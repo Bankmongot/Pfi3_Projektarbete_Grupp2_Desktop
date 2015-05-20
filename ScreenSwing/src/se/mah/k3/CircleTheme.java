@@ -29,6 +29,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 	
 	public CircleTheme() {
 		System.out.println("Created DrawPanel");
+
 		
 	}
 	

@@ -32,9 +32,10 @@ public class FireBase {
 	public FireBase(){
 		themeInterface = FullScreen.setUpTheme("Circles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
-		//myFirebaseRef.removeValue(); //Cleans out everything
+		myFirebaseRef.removeValue(); //Cleans out everything
 		//myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);
 		myFirebaseRef.child("ScreenNbr").setValue(145); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
+    	myFirebaseRef.child("Active").setValue(false);
 		fbData = new FirebaseData();
 		
 		
@@ -63,7 +64,10 @@ public class FireBase {
 					
 					if (dataSnapshot.getKey().equals("Theme")){
 						//System.out.println("New theme: "+(String)dataSnapshot.getValue());
-						fbData.setTheme((String)dataSnapshot.getValue());						
+						fbData.setTheme((String)dataSnapshot.getValue());
+						if(dataSnapshot.getValue() != null){
+				        	myFirebaseRef.child("Active").setValue(true);
+						}
 					}
 					
 					//themeInterface = FullScreen.setUpTheme("string");
@@ -83,28 +87,10 @@ public class FireBase {
 								System.out.println("votes: "+dataSnapshot2.getValue());
 							}
 						}
-						 // The line above prints: newPost {four={alternative=Monday, votes=0}, Vote1=1, one={alternative=Saturday, votes=0}, Theme=Circles, Vote3=1, Question=Favorite day?, three={alternative=Wensday, votes=0}, two={alternative=Friday, votes=0}}
-					     System.out.println("Answer: " + newPost.get("one")); //This returns a NullPointerExeption
-					     
-					     //How do we reach inside "newPost" values?
-					     //They structure is like this:
-					     /*
-					      * four -> alternative="Monday";
-					      * 		votes=0;
-					      * three-> alternative="Wensday";
-					      * 		vote=0;
-					      * 
-					      *  And so on...
-					      * 
-					      * 
-					      */
-					     
-					     
-					     //System.out.println("Votes: " + newPost.get("votes"));
+					     System.out.println("Answer: " + newPost.get("one")); 
+					    
 					 }
-					
-					//Why don't you add all these below to your object FirebaseData? / Lars
-					//This was only for demo, we have Hashmap contaning these values in FirebaseData.    /     Nils
+
 					String alt1 = null;
 					if (dataSnapshot.getKey().equals("Alt1")){
 						 alt1 = (String)dataSnapshot.getValue();
@@ -175,7 +161,6 @@ public class FireBase {
 //SET TIME HERE
 				
 				new Reminder(49990);
-	        	myFirebaseRef.child("Active").setValue(true);
 
 				timer.schedule(new TimerTask() {
 					  @Override

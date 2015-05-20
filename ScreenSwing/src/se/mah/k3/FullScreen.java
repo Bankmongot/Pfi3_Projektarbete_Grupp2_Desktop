@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.firebase.client.Firebase;
+
 import java.awt.event.KeyEvent;
 
 public class FullScreen extends JFrame implements KeyEventDispatcher{
@@ -22,6 +24,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 	private int PrevX = 100 ,PrevY = 100 ,PrevWidth = 480,PrevHeight = 640;
 	//private static ThemeInterface tInter;
 	private FireBase fb;
+
 
 	/**
 	 * Launch the application.
