@@ -72,6 +72,17 @@ public class FireBase {
 					if (dataSnapshot.getKey().equals("four")){
 						 Map<String, Object> newPost = (Map<String, Object>) arg0.getValue();
 						 System.out.println("newPost "+newPost);
+						 //Get all children to help them and feed them if they are hungry
+						 Iterable<DataSnapshot> fourChildren = dataSnapshot.getChildren();
+						 for (DataSnapshot dataSnapshot2 : fourChildren) {
+							 //find them etc.......
+							if (dataSnapshot2.getKey().equals("alternative")){
+								System.out.println("aLternative: "+dataSnapshot2.getValue());
+							}
+							if (dataSnapshot2.getKey().equals("votes")){
+								System.out.println("votes: "+dataSnapshot2.getValue());
+							}
+						}
 						 // The line above prints: newPost {four={alternative=Monday, votes=0}, Vote1=1, one={alternative=Saturday, votes=0}, Theme=Circles, Vote3=1, Question=Favorite day?, three={alternative=Wensday, votes=0}, two={alternative=Friday, votes=0}}
 					     System.out.println("Answer: " + newPost.get("one")); //This returns a NullPointerExeption
 					     
