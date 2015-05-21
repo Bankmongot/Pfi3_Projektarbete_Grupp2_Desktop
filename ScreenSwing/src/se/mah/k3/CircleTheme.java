@@ -7,16 +7,14 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-<<<<<<< HEAD:ScreenSwing/src/se/mah/k3/CircleTheme.java
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+
+
 public class CircleTheme extends JPanel implements ThemeInterface{
-=======
-public class DrawPanel extends JPanel implements ThemeInterface{
->>>>>>> origin/Helpers:ScreenSwing/src/se/mah/k3/DrawPanel.java
 	private static final long serialVersionUID = 1L;
 	//A vector is like an ArrayList a little bit slower but Thread-safe. This means that it can handle concurrent changes. 
 	Font font = new Font("Avenir next", Font.BOLD, 40);
@@ -94,20 +92,20 @@ public class DrawPanel extends JPanel implements ThemeInterface{
 			 g.drawString(Constants.alt2, 650, 560);
 		
 	}
+		@Override
+		public void updateData(FirebaseData data) {
+			// TODO Auto-generated method stub
+			System.out.println("update data called");
+			question = data.getQuestion();
+			//invalidate();
+			repaint();
+		}
 
 
 
 
 
-	@Override
-	public void updateData(FirebaseData data) {
-		// TODO Auto-generated method stub
-		System.out.println("update data called");
-		question = data.getQuestion();
-		//invalidate();
-		repaint();
-		
-	}
 }
+
 
 	

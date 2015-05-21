@@ -8,9 +8,9 @@ public class Helpers {
 	
 	
 	/**
-	 * Konverterar röster i antal till procent
+	 * Konverterar rï¿½ster i anal till procent
 	 * @param HashMap<String, Integer> stoppa in FirebaseDatas HashMap "inData"
-	 * @return HashMap<String, Double> få ut procent som decimaltal mellan 0,0 och 1
+	 * @return HashMap<String, Double> fï¿½ ut procent som decimaltal mellan 0,0 och 1
 	 * */
 	@SuppressWarnings("null")
 	public static HashMap<String, Double> calcPercent(HashMap<String, Integer> hash){
@@ -34,11 +34,11 @@ public class Helpers {
 	}
 	
 	/**
-	 * Räknar ut var en stapel som växewr uppåt ska börja i Y led 
-	 * @param int Tänk dig grafens yta som en rektangel, detta är Y-värdet för det övre vänstra hörnet.
-	 * @param int Tänk dig grafens yta som en rektangel, detta är hur hög den är.
-	 * @param double Detta är antalet votes i procent som decimaltal mellan 0,0 och 1
-	 * @return float ett yvärde i pixlar
+	 * Rï¿½knar ut var en stapel som vï¿½xewr uppï¿½t ska bï¿½rja i Y led 
+	 * @param int Tï¿½nk dig grafens yta som en rektangel, detta ï¿½r Y-vï¿½rdet fï¿½r det ï¿½vre vï¿½nstra hï¿½rnet.
+	 * @param int Tï¿½nk dig grafens yta som en rektangel, detta ï¿½r hur hï¿½g den ï¿½r.
+	 * @param double Detta ï¿½r antalet votes i procent som decimaltal mellan 0,0 och 1
+	 * @return float ett yvï¿½rde i pixlar
 	 * */
 	public static float getYOrgin(int graphYPos, int graphMaxHeight, double votesInPercent){
 		return (float) ((graphYPos + graphMaxHeight) - (graphMaxHeight * votesInPercent));
