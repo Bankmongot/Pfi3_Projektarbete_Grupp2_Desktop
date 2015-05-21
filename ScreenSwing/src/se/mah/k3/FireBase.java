@@ -1,13 +1,12 @@
 package se.mah.k3;
 
 import java.util.HashMap;
-
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
-
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -31,7 +30,6 @@ public class FireBase {
 		themeInterface = FullScreen.setUpTheme("Circles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
 		myFirebaseRef.removeValue(); //Cleans out everything
-		//myFirebaseRef.child("ScreenNbr").setValue(Constants.screenNbr);
 		myFirebaseRef.child("ScreenNbr").setValue(145); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
     	myFirebaseRef.child("Active").setValue(false);
 		fbData = new FirebaseData();
@@ -48,8 +46,6 @@ public class FireBase {
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
 				Iterable<DataSnapshot> dsList = arg0.getChildren();
-				//Collections.sort(users);
-				//int place = Collections.binarySearch(users, new User(arg0.getKey(),0,0)); //Find the user username has to be unique uses the method compareTo in User
 				
 				//Snapshot is listening for changes, and getting the data.
 				for (DataSnapshot dataSnapshot : dsList) {
@@ -67,27 +63,58 @@ public class FireBase {
 				        	myFirebaseRef.child("Active").setValue(true);
 						}
 					}
+										
+									
+					//      H  A  S  H  M  A  P
 					
-					//themeInterface = FullScreen.setUpTheme("string");
-					
-																								//      H  A  S  H  M  A  P
-					if (dataSnapshot.getKey().equals("four")){
-						 Map<String, Object> newPost = (Map<String, Object>) arg0.getValue();
-						 System.out.println("newPost "+newPost);
-						 //Get all children to help them and feed them if they are hungry
-						 Iterable<DataSnapshot> fourChildren = dataSnapshot.getChildren();
+					for(int i = 0; i<10; i++){
+						String index = Integer.toString(i);
+					if (dataSnapshot.getKey().equals(index)){
+						 HashMap<String, Integer> newPost = (HashMap<String, Integer>) arg0.getValue();
+						 //System.out.println("newPost "+newPost);
+						 
+						 fbData.setInData(newPost);
+						 
+						/*	Map<String, Object> newPost2 = (Map<String, Object>) arg0.getValue();
+							Set<String> keys = newPost2.keySet();
+							
+							for(String key: keys){
+								//System.out.println(key);
+								//System.out.println(" "+newPost2.get(key));
+								
+								
+								
+								
+								@SuppressWarnings("unchecked")
+								HashMap<Long, HashMap<String, Long>> mapp = (HashMap<Long, HashMap<String, Long>>) newPost2.get(key);
+								
+								if(mapp.equals("alternative")){
+									System.out.println(mapp);
+								}
+								
+								
+								
+								if(key.equals("alternative")){
+									//System.out.println(key);
+								}
+							}*/
+							
+						 
+						/* Iterable<DataSnapshot> fourChildren = dataSnapshot.getChildren();
 						 for (DataSnapshot dataSnapshot2 : fourChildren) {
-							 //find them etc.......
+							 							 
 							if (dataSnapshot2.getKey().equals("alternative")){
-								System.out.println("aLternative: "+dataSnapshot2.getValue());
+								System.out.println("alternative: "+dataSnapshot2.getValue());
 							}
 							if (dataSnapshot2.getKey().equals("votes")){
 								System.out.println("votes: "+dataSnapshot2.getValue());
 							}
-						}
-					     System.out.println("Answer: " + newPost.get("one")); 
-					    
+						} */
 					 }
+					 
+					
+					
+					}
 
 					String alt1 = null;
 					if (dataSnapshot.getKey().equals("Alt1")){

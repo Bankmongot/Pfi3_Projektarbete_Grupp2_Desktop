@@ -52,8 +52,6 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		g.drawString("Frame: "+frame, 250, 50);
 		
 		g.setColor(Color.red);
-		//Lars changes
-		//g.drawString(Constants.question, 100, 50);
 		g.drawString(question, 100, 90);
 		
 		Font fontt = new Font("Avenir next", Font.BOLD, 20);
@@ -98,7 +96,6 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		@Override
 		public void updateData(FirebaseData data) {
 			// TODO Auto-generated method stub
-			System.out.println("update data called");
 			question = data.getQuestion();
 			//invalidate();
 			repaint();
