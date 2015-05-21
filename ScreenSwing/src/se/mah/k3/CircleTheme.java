@@ -4,20 +4,19 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Vector;
 
 import javax.swing.JPanel;
 
+<<<<<<< HEAD:ScreenSwing/src/se/mah/k3/CircleTheme.java
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 public class CircleTheme extends JPanel implements ThemeInterface{
+=======
+public class DrawPanel extends JPanel implements ThemeInterface{
+>>>>>>> origin/Helpers:ScreenSwing/src/se/mah/k3/DrawPanel.java
 	private static final long serialVersionUID = 1L;
 	//A vector is like an ArrayList a little bit slower but Thread-safe. This means that it can handle concurrent changes. 
 	Font font = new Font("Avenir next", Font.BOLD, 40);

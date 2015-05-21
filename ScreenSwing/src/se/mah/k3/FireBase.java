@@ -1,14 +1,14 @@
 package se.mah.k3;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
+<<<<<<< HEAD
 import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
+=======
+>>>>>>> origin/Helpers
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -17,7 +17,6 @@ import com.firebase.client.FirebaseError;
 
 public class FireBase {
 	private Firebase myFirebaseRef;
-	private Vector<User> users = new Vector<User>();
 	private String ID; // To do
 	private FirebaseData fbData;
 	private HashMap<String, Integer> map = new HashMap<String, Integer>();
