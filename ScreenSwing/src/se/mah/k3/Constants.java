@@ -29,9 +29,9 @@ public class Constants {
 	public static int x4 = 0;
 	public static int y4 = 0;
 	
-	static Color green = new Color(0x99C21D);
-	static Color blue = new Color(0x0099CC);
-	static Color pink = new Color(0xCD1139);
+	public static Color green = new Color(0x99C21D);
+	public static Color blue = new Color(0x0099CC);
+	public static Color pink = new Color(0xCD1139);
 
 
 

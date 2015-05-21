@@ -11,6 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import se.mah.k3.Themes.CircleTheme;
+import se.mah.k3.Themes.DummyTheme;
+
 import com.firebase.client.Firebase;
 
 import java.awt.event.KeyEvent;
