@@ -29,6 +29,7 @@ public class Havs extends JPanel implements ThemeInterface {
 		sten.setIcon(new ImageIcon(Havs.class.getResource("/images/sten.png")));
 		sten.setBounds(0, -366, 1438, 926);
 		add(sten);
+		///havs tema
 		
 		JLabel våg1 = new JLabel("New label");
 		våg1.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g1.png")));
