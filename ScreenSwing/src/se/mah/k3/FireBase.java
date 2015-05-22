@@ -67,15 +67,15 @@ public class FireBase {
 									
 					//      H  A  S  H  M  A  P
 					
-					for(int i = 0; i<10; i++){
+			/*		for(int i = 0; i<10; i++){
 						String index = Integer.toString(i);
 					if (dataSnapshot.getKey().equals(index)){
-						 HashMap<String, Integer> newPost = (HashMap<String, Integer>) arg0.getValue();
+						 //HashMap<String, Integer> newPost = (HashMap<String, Integer>) arg0.getValue();
 						 //System.out.println("newPost "+newPost);
 						 
-						 fbData.setInData(newPost);
+						 //fbData.setInData(newPost);
 						 
-						/*	Map<String, Object> newPost2 = (Map<String, Object>) arg0.getValue();
+							Map<String, Object> newPost2 = (Map<String, Object>) arg0.getValue();
 							Set<String> keys = newPost2.keySet();
 							
 							for(String key: keys){
@@ -97,10 +97,10 @@ public class FireBase {
 								if(key.equals("alternative")){
 									//System.out.println(key);
 								}
-							}*/
+							}
 							
 						 
-						/* Iterable<DataSnapshot> fourChildren = dataSnapshot.getChildren();
+						 Iterable<DataSnapshot> fourChildren = dataSnapshot.getChildren();
 						 for (DataSnapshot dataSnapshot2 : fourChildren) {
 							 							 
 							if (dataSnapshot2.getKey().equals("alternative")){
@@ -109,48 +109,48 @@ public class FireBase {
 							if (dataSnapshot2.getKey().equals("votes")){
 								System.out.println("votes: "+dataSnapshot2.getValue());
 							}
-						} */
-					 }
+						} 
+					 } 
 					 
 					
 					
-					}
+					} */
 
 					String alt1 = null;
 					if (dataSnapshot.getKey().equals("Alt1")){
-						 alt1 = (String)dataSnapshot.getValue();
+						 fbData.setAlt1((String)dataSnapshot.getValue());
 					 }
 					String alt2 = null;
 					if (dataSnapshot.getKey().equals("Alt2")){
-						 alt2 = (String)dataSnapshot.getValue();
+						 fbData.setAlt2((String)dataSnapshot.getValue());
 					 }
 					String alt3 = null;
 					if (dataSnapshot.getKey().equals("Alt3")){
-						 alt3 = (String)dataSnapshot.getValue();
+						 fbData.setAlt3((String)dataSnapshot.getValue());
 					 }
 					String alt4 = null;
 					if (dataSnapshot.getKey().equals("Alt4")){
-						 alt4 = (String)dataSnapshot.getValue();
+						 fbData.setAlt4((String)dataSnapshot.getValue());
 					 }
 					
 					long vote1 = 0;
 					if (dataSnapshot.getKey().equals("Vote1")){
-						 vote1 = ((long)dataSnapshot.getValue()); 
+						 fbData.setVote1(((long)dataSnapshot.getValue())); 
 					}
 					
 					long vote2 = 0;
 					if (dataSnapshot.getKey().equals("Vote2")){
-						 vote2 = ((long)dataSnapshot.getValue()); 
+						fbData.setVote2(((long)dataSnapshot.getValue())); 
 					}
 					
 					long vote3 = 0;
 					if (dataSnapshot.getKey().equals("Vote3")){
-						 vote3 = ((long)dataSnapshot.getValue()); 
+						fbData.setVote3(((long)dataSnapshot.getValue())); 
 					}
 					
 					long vote4 = 0;
 					if (dataSnapshot.getKey().equals("Vote4")){
-						 vote4 = ((long)dataSnapshot.getValue()); 
+						fbData.setVote4(((long)dataSnapshot.getValue())); 
 					}
 					
 					//OK tell the panel that there is data
