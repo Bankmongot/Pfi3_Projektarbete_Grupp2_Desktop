@@ -27,7 +27,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 	Font font = new Font("Avenir next", Font.BOLD, 40);
 	String question = "Dummy";
 	private int frame = 0;
-	private final JTextField txtHejhejhejhej = new JTextField();
+	private final JTextField txtHej = new JTextField();
 	
 
 	
@@ -43,17 +43,17 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setBounds(82, 5, 292, 233);
-		lblNewLabel.setIcon(new ImageIcon(CircleTheme.class.getResource("/resourcesforIceCream/countmeinlogo-01.png")));
+		lblNewLabel.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogo-01.png")));
 		add(lblNewLabel);
-		txtHejhejhejhej.setBackground(Color.WHITE);
-		txtHejhejhejhej.setEditable(false);
-		txtHejhejhejhej.setEnabled(false);
-		txtHejhejhejhej.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHejhejhejhej.setFont(new Font("Roboto Cn", Font.PLAIN, 20));
-		txtHejhejhejhej.setText("No current survey");
-		txtHejhejhejhej.setBounds(0, 249, 450, 40);
-		add(txtHejhejhejhej);
-		txtHejhejhejhej.setColumns(10);
+		txtHej.setBackground(Color.WHITE);
+		txtHej.setEditable(false);
+		txtHej.setEnabled(false);
+		txtHej.setHorizontalAlignment(SwingConstants.CENTER);
+		txtHej.setFont(new Font("Roboto Cn", Font.PLAIN, 20));
+		txtHej.setText("No current survey");
+		txtHej.setBounds(0, 249, 450, 40);
+		add(txtHej);
+		txtHej.setColumns(10);
 		System.out.println("Created DrawPanel");
 		
 	}
