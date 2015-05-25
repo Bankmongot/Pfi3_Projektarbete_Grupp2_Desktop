@@ -7,10 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
-import se.mah.k3.Constants;
-import se.mah.k3.FirebaseData;
-import se.mah.k3.ThemeInterface;
 import se.mah.k3.*;
+import se.mah.k3.Themes.VerticalBoxes.GraphBox;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -27,7 +25,6 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 	private int frame = 0;
 	
 
-	
 	
 	public CircleTheme() {
 		System.out.println("Created DrawPanel");	
