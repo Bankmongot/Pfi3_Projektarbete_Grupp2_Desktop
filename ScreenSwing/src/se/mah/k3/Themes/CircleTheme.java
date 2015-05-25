@@ -39,7 +39,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		setLayout(null);
 		
 		JLabel lblNoCurrentSurvey = new JLabel("No current survey");
-		lblNoCurrentSurvey.setBounds(530, 650, 279, 57);
+		lblNoCurrentSurvey.setBounds(500, 650, 351, 57);
 		lblNoCurrentSurvey.setForeground(Color.BLACK);
 		
 		add(lblNoCurrentSurvey);
