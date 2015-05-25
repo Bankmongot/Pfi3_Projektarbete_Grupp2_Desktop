@@ -1,11 +1,14 @@
 package se.mah.k3.Themes;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
+
 import javax.swing.ImageIcon;
 
 public class Havs extends JPanel implements ThemeInterface {
@@ -36,6 +39,16 @@ public class Havs extends JPanel implements ThemeInterface {
 		våg1.setBounds(0, 327, 1080, 233);
 		add(våg1);
 		
+		JLabel våg2 = new JLabel("New label");
+		våg2.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g2.png")));
+		våg2.setBounds(0, 187, 1080, 373);
+		add(våg2);
+		
+		JLabel våg3 = new JLabel("New label");
+		våg3.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g3.png")));
+		våg3.setBounds(0, 215, 1080, 345);
+		add(våg3);
+		
 		JLabel birdOne = new JLabel("");
 		birdOne.setIcon(new ImageIcon(Havs.class.getResource("/images/f\u00E5gel-liten.png")));
 		birdOne.setBounds(922, 45, 94, 102);
@@ -53,5 +66,12 @@ public class Havs extends JPanel implements ThemeInterface {
 		fbData = data;
 		myLabel.setText(fbData.getQuestion());
 		repaint();
+	}
+	
+	protected void paintComponent(Graphics g) {
+		
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/lighthouse_T.png")), 0, 300, 300, 300, null);
+      
+		this.repaint();
 	}
 }
