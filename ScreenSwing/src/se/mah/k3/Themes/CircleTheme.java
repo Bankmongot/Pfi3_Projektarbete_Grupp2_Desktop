@@ -41,6 +41,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		JLabel lblNoCurrentSurvey = new JLabel("No current survey");
 		lblNoCurrentSurvey.setBounds(530, 650, 279, 57);
 		lblNoCurrentSurvey.setForeground(Color.BLACK);
+		
 		add(lblNoCurrentSurvey);
 		lblNoCurrentSurvey.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNoCurrentSurvey.setFont(new Font("Roboto Cn", Font.PLAIN, 35));
