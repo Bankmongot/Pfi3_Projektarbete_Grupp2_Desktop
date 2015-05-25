@@ -7,8 +7,10 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import se.mah.k3.Constants;
+import se.mah.k3.FirebaseData;
+import se.mah.k3.ThemeInterface;
 import se.mah.k3.*;
-import se.mah.k3.Themes.VerticalBoxes.GraphBox;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -18,6 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.DropMode;
 
 
 
@@ -27,38 +30,33 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 	Font font = new Font("Avenir next", Font.BOLD, 40);
 	String question = "Dummy";
 	private int frame = 0;
-	private final JTextField txtHej = new JTextField();
 	
 
+	
 	
 	public CircleTheme() {
 		setBackground(Color.WHITE);
 		setLayout(null);
 		
+		JLabel lblNoCurrentSurvey = new JLabel("No current survey");
+		lblNoCurrentSurvey.setBounds(530, 650, 279, 57);
+		lblNoCurrentSurvey.setForeground(Color.BLACK);
+		add(lblNoCurrentSurvey);
+		lblNoCurrentSurvey.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNoCurrentSurvey.setFont(new Font("Roboto Cn", Font.PLAIN, 35));
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(300, 0, 900, 700);
+		add(lblNewLabel);
+		lblNewLabel.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogoLarge.png")));
+		
 		JPanel panel = new JPanel();
-		panel.setBounds(76, 121, 1, 1);
-		panel.setBackground(Color.PINK);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 0, 2000,1000);
 		add(panel);
 		panel.setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(82, 5, 292, 233);
-		lblNewLabel.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogo-01.png")));
-		add(lblNewLabel);
-		txtHej.setBackground(Color.WHITE);
-		txtHej.setEditable(false);
-		txtHej.setEnabled(false);
-		txtHej.setHorizontalAlignment(SwingConstants.CENTER);
-		txtHej.setFont(new Font("Roboto Cn", Font.PLAIN, 20));
-		txtHej.setText("No current survey");
-		txtHej.setBounds(0, 249, 450, 40);
-		add(txtHej);
-		txtHej.setColumns(10);
 		System.out.println("Created DrawPanel");
 		
 	}
-	
-
 
 	
 //	
@@ -127,12 +125,10 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 			//invalidate();
 			repaint();
 		}
-//
-//
-//
-//
-//
+
+
+
+
+
 }
-//
-//
 	
