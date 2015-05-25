@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import se.mah.k3.Themes.CircleTheme;
 import se.mah.k3.Themes.DummyTheme;
+import se.mah.k3.Themes.ThemeOfCircles;
 import se.mah.k3.Themes.VerticalBoxes;
 
 import com.firebase.client.Firebase;
@@ -64,6 +65,14 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new VerticalBoxes();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
+			break;
+		case "ThemeOfCircles":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new ThemeOfCircles();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
