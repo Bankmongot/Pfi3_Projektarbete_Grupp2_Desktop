@@ -44,9 +44,9 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
         setPreferredSize(new Dimension(1080,560));
         setMinimumSize(new Dimension(1080,560));
 
-        Ovals.add(new GraphOval(200, 50, Color.blue));
-        Ovals.add(new GraphOval(200, 100, Color.orange));
-        Ovals.add(new GraphOval(200, 130, Color.yellow));
+        Ovals.add(new GraphOval(200, 50, Color.red));
+        Ovals.add(new GraphOval(200, 100, Color.green));
+        Ovals.add(new GraphOval(200, 130, Color.blue));
 
 
 		myLabel = new JLabel("New label");
@@ -76,10 +76,15 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
 
 		// TODO Auto-generated method stub
     	fbData = data;
+    	
+    	Ovals.get(0).setSize((int) (50 + fbData.getVote1()*2));
+		Ovals.get(1).setSize((int) (50 + fbData.getVote2()*2));
+		Ovals.get(2).setSize((int) (50 + fbData.getVote3()*2));
+    	
     	myLabel.setText(fbData.getQuestion()); 
     	repaint();
 
-	}
+	  }
 
        class GraphOval{
 
