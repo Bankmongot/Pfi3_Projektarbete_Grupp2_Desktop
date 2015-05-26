@@ -15,6 +15,7 @@ public class Constants {
 	public static long alt3C = 0;
 	public static long alt4C;
 	
+	public static boolean falseValue = false;
 		
 	public static boolean t1 = false;
 	public static int x1 = 0;
