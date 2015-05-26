@@ -36,8 +36,8 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
     JLabel myLabel;
 
    
-    private int frame = 0;
-    Font font = new Font("Avenir next", Font.BOLD, 40);
+   // private int frame = 0;
+ //   Font font = new Font("Avenir next", Font.BOLD, 40);
 
 
 
@@ -70,13 +70,13 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
      public void paint(Graphics g) {
  		super.paintComponent(g);
  		
- 		g.drawString(fbData.getQuestion(), 100, 30);
+ 		g.drawString("Darriga rumpor?", 100, 30);
  		//g.drawString(String.valueOf(fbData.getVote1()), 25, 35);
  		
  		int y = 50;
  		for (GraphOval oval : Ovals) {
  			g.setColor(oval.color);
- 			g.fillRect(oval.xPos, y, oval.size, oval.size);
+ 			g.fillOval(oval.xPos, y, oval.size, oval.size);
  			y += oval.size;
  			oval.yPos = y;
  		}

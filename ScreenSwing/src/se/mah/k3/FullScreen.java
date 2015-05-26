@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import se.mah.k3.Themes.CircleTheme;
 import se.mah.k3.Themes.DummyTheme;
+import se.mah.k3.Themes.StarTheme;
 import se.mah.k3.Themes.VerticalBoxes;
 
 import com.firebase.client.Firebase;
@@ -58,7 +59,15 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			panel = new CircleTheme();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
-			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
+			break;
+		case "Stars":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new StarTheme();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
 		case "VerticalBoxes":
 			//Empty all old crap
@@ -66,7 +75,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			panel = new VerticalBoxes();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
-			contentPane.revalidate(); //This seems to be needed tor really repaint a component with graphical objects strange....
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
 		default:
 			//Empty all old crap
