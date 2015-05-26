@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
   
        
        public BottleTheme(){
+    	   
   	setBackground(Color.WHITE);
    setLayout(null);
            panel.setBounds(0, 0, 0, 0);
