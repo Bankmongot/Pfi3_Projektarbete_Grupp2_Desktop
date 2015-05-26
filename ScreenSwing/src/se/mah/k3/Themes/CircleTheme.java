@@ -52,7 +52,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 2000,1000);
+		panel.setBounds(0, 0, 2000,1080);
 		add(panel);
 		panel.setLayout(null);
 		System.out.println("Created DrawPanel");
