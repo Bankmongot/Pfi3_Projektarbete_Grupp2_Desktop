@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import se.mah.k3.Constants;
 import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
 
@@ -16,6 +17,7 @@ import java.awt.Color;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
 import java.awt.Font;
 
 public class StarTheme extends JPanel implements ThemeInterface {
@@ -36,6 +38,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		setLayout(null);
 		
 		
+		//JLabel lblQuestionHere = new JLabel(fbData.getQuestion());
 		JLabel lblQuestionHere = new JLabel("Question?");
 		lblQuestionHere.setBackground(new Color(0, 255, 0));
 		lblQuestionHere.setFont(new Font("Roboto", Font.BOLD, 77));
@@ -46,13 +49,15 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		//lblQuestionHere.setText(fbData.getQuestion());		
 
 		
-		JLabel lblAlt1 = new JLabel("Alt 1");
+		//JLabel lblAlt1 = new JLabel(fbData.getAlt1());
+		JLabel lblAlt1 = new JLabel("Alt1");
 		lblAlt1.setFont(new Font("Roboto", Font.BOLD, 30));
 		lblAlt1.setForeground(Color.WHITE);
 		lblAlt1.setBounds((int) (width/8*1-100), 149, 100, 30);
 		add(lblAlt1);
 		
-		JLabel lblResult1 = new JLabel("Result 1");
+		//JLabel lblResult1 = new JLabel(String.valueOf(fbData.getVote1()));
+		JLabel lblResult1 = new JLabel("Result1");
 		lblResult1.setForeground(Color.WHITE);
 		lblResult1.setFont(new Font("Roboto", Font.BOLD, 15));
 		lblResult1.setBounds((int) (width/8*1-100), 177, 46, 14);
@@ -64,7 +69,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		lblAlt2.setBounds((int) (width/8*2-100), 149, 100, 30);
 		add(lblAlt2);
 		
-		JLabel lblResult2 = new JLabel("Result 1");
+		JLabel lblResult2 = new JLabel("Result 2");
 		lblResult2.setForeground(Color.WHITE);
 		lblResult2.setFont(new Font("Roboto", Font.BOLD, 15));
 		lblResult2.setBounds((int) (width/8*2-100), 177, 46, 14);
@@ -124,7 +129,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		lblAlt7.setBounds((int) (width/8*7-100), 149, 100, 30);
 		add(lblAlt7);
 		
-		JLabel lblResult7 = new JLabel("Result 1");
+		JLabel lblResult7 = new JLabel("Result 7");
 		lblResult7.setForeground(Color.WHITE);
 		lblResult7.setFont(new Font("Roboto", Font.BOLD, 15));
 		lblResult7.setBounds((int) (width/8*7-100), 177, 46, 14);
