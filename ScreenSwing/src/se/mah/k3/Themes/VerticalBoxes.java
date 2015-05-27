@@ -3,6 +3,7 @@ package se.mah.k3.Themes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +22,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 	FirebaseData fbData;
 	HashMap<String, Double> percent;
-	int yStart = 50;
-	int xAlign = 512;
+	int yFloor = 625;
+	int height = 600;
+	int xAlign = 512; //Where all the boxes should be x-wise
 	
 	
 	JLabel myLabel;
@@ -30,12 +32,6 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	List<GraphBox> boxes = new ArrayList<GraphBox>();
 
 	public VerticalBoxes(){
-		
-		//temp
-		   
-		   
-		   
-		//-/temp
 		
 		//percent = Helpers.calcPercent(fbData.getInData());
 		
@@ -53,10 +49,13 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		add(myLabel);
 	}
 
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawString(fbData.getQuestion(), 100, 30);
+		Graphics2D g2 = (Graphics2D)g;
+		g2.fillRect(500, 500, 50, 50);
+		
+		//g.drawString(fbData.getQuestion(), 100, 30);
 		//g.drawString(String.valueOf(fbData.getVote1()), 25, 35);
 		
 		int y = 50;
@@ -96,6 +95,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	class GraphBox{
 		//xPos is centered, yPos is on the top
 		int size;
+		int grow = 0;
 		int xPos;
 		int yPos;
 		Color color;
