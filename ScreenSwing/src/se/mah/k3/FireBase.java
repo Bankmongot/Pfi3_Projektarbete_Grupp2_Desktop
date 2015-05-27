@@ -29,7 +29,7 @@ public class FireBase {
 	public FireBase(){
 		themeInterface = FullScreen.setUpTheme("ThemeOfCircles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
-		myFirebaseRef.removeValue(); //Cleans out everything
+		//myFirebaseRef.removeValue(); //Cleans out everything
 		myFirebaseRef.child("ScreenNbr").setValue(145); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
     	myFirebaseRef.child("Active").setValue(false);
 		fbData = new FirebaseData();
