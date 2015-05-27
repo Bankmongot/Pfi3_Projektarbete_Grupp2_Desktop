@@ -10,6 +10,9 @@ import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
 
 import javax.swing.ImageIcon;
+import javax.swing.JDesktopPane;
+
+import java.awt.Color;
 
 public class Havs extends JPanel implements ThemeInterface {
 
@@ -17,47 +20,65 @@ public class Havs extends JPanel implements ThemeInterface {
 	FirebaseData fbData;
 	JLabel myLabel;
 
-	public Havs(){	
+	public Havs(){
 		
-		setPreferredSize(new Dimension(1080,560));
-		setMinimumSize(new Dimension(1080,560));
-		setLayout(null);
+		
+		setBackground(Color.BLACK);	
 
+		setPreferredSize(new Dimension(1024,768));
+		setMinimumSize(new Dimension(1024,768));
+		setLayout(null);
+//		
+//		JPanel Panel = new JPanel(){
+//			protected void paintComponent(Graphics g) {
+//				super.paintComponent(g);
+//				g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/lighthouse_T.png")), 150, 400, 300, 300, null);
+//				
+//				
+//				this.repaint();
+//		
 		myLabel = new JLabel("New label");
 		myLabel.setBounds(66, 45, 207, 16);
 		myLabel.setText("The question will appear here!");
 		add(myLabel);
-		
+
+
 		JLabel sten = new JLabel("New label");
 		sten.setIcon(new ImageIcon(Havs.class.getResource("/images/sten.png")));
-		sten.setBounds(0, -366, 1438, 926);
+		sten.setBounds(0, 590, 1495, 172);
 		add(sten);
-		///havs tema
-		
-		JLabel våg1 = new JLabel("New label");
-		våg1.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g1.png")));
-		våg1.setBounds(0, 327, 1080, 233);
-		add(våg1);
-		
-		JLabel våg2 = new JLabel("New label");
-		våg2.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g2.png")));
-		våg2.setBounds(0, 187, 1080, 373);
-		add(våg2);
-		
-		JLabel våg3 = new JLabel("New label");
-		våg3.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g3.png")));
-		våg3.setBounds(0, 215, 1080, 345);
-		add(våg3);
-		
+
+		JLabel vitvåg = new JLabel("");
+		vitvåg.setIcon(new ImageIcon(Havs.class.getResource("/images/vitv\u00E5g.png")));
+		vitvåg.setBounds(0, 493, 1495, 240);
+		add(vitvåg);
+
+		JLabel lblåvåg = new JLabel("New label");
+		lblåvåg.setIcon(new ImageIcon(Havs.class.getResource("/images/lbl\u00E5.png")));
+		lblåvåg.setBounds(0, 397, 1495, 325);
+
+		add(lblåvåg);
+
+		JLabel mblåvåg = new JLabel("");
+		mblåvåg.setIcon(new ImageIcon(Havs.class.getResource("/images/v\u00E5g3.png")));
+		mblåvåg.setBounds(0, 414, 1495, 308);
+		add(mblåvåg);
+
 		JLabel birdOne = new JLabel("");
 		birdOne.setIcon(new ImageIcon(Havs.class.getResource("/images/f\u00E5gel-liten.png")));
 		birdOne.setBounds(922, 45, 94, 102);
 		add(birdOne);
-		
-		JLabel lblNewLabel = new JLabel("New label");
+
+		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(Havs.class.getResource("/images/hav.png")));
-		lblNewLabel.setBounds(-42, -163, 1122, 723);
+		lblNewLabel.setBounds(0, 0, 1495, 733);
 		add(lblNewLabel);
+
+		JDesktopPane desktopPane = new JDesktopPane();
+		desktopPane.setBounds(731, 343, 6, 74);
+		add(desktopPane);
+		
+		
 	}
 
 	@Override
@@ -69,9 +90,11 @@ public class Havs extends JPanel implements ThemeInterface {
 	}
 	
 	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/lighthouse_T.png")), 150, 400, 300, 300, null);
 		
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/lighthouse_T.png")), 0, 300, 300, 300, null);
-      
-		this.repaint();
+		
+		this.repaint();	
 	}
+	
 }

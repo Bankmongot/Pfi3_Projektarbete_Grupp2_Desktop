@@ -3,6 +3,9 @@ package se.mah.k3.Themes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +24,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 	FirebaseData fbData;
 	HashMap<String, Double> percent;
-	int yStart = 50;
-	int xAlign = 512;
+	int yFloor = 625;
+	int graphHeight = 600;
+	int xAlign = 512; //Where all the boxes should be x-wise
 	
 	
 	JLabel myLabel;
@@ -31,21 +35,15 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 	public VerticalBoxes(){
 		
-		//temp
-		   
-		   
-		   
-		//-/temp
-		
 		//percent = Helpers.calcPercent(fbData.getInData());
 		
 		setLayout(null);
 		setPreferredSize(new Dimension(1080,560));
 		setMinimumSize(new Dimension(1080,560));
 		
-		boxes.add(new GraphBox(200, 50, Color.blue));
-		boxes.add(new GraphBox(200, 100, Color.orange));
-		boxes.add(new GraphBox(200, 130, Color.yellow));
+		boxes.add(new GraphBox(Color.blue));
+		boxes.add(new GraphBox(Color.orange));
+		boxes.add(new GraphBox(Color.yellow));
 		
 		myLabel = new JLabel("New label");
 		myLabel.setBounds(161, 224, 207, 16);
@@ -53,31 +51,54 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		add(myLabel);
 	}
 
-	public void paint(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawString(fbData.getQuestion(), 100, 30);
-		//g.drawString(String.valueOf(fbData.getVote1()), 25, 35);
+		//Denna metoden behöver städas
+		Graphics2D g2 = (Graphics2D)g;
 		
-		int y = 50;
+		g2.fillRect(500, 500, 50, 50);
+		
+		int numOfBoxes = boxes.size();
+		double allBoxesHeight = 0.0;
+		
 		for (GraphBox box : boxes) {
-			g.setColor(box.color);
-			g.fillRect(box.xPos, y, box.size, box.size);
-			y += box.size;
-			box.yPos = y;
+			allBoxesHeight += (box.size + box.grow + box.votes);
 		}
-		//g.fillRect(100, 10, 60, 50);
 		
-		g.setColor(Color.black);
-		g.drawString(fbData.getAlt1(), 100, (boxes.get(0).yPos)-(boxes.get(0).size/2));
-		g.drawString(fbData.getAlt2(), 100, (boxes.get(1).yPos)-(boxes.get(1).size/2));
-		g.drawString(fbData.getAlt3(), 100, (boxes.get(2).yPos)-(boxes.get(2).size/2));
-		
-		g.drawString(String.valueOf(fbData.getVote1()), xAlign-5, (boxes.get(0).yPos)-(boxes.get(0).size/2));
-		g.drawString(String.valueOf(fbData.getVote2()), xAlign-5, (boxes.get(1).yPos)-(boxes.get(1).size/2));
-		g.drawString(String.valueOf(fbData.getVote3()), xAlign-5, (boxes.get(2).yPos)-(boxes.get(2).size/2));
+		if( allBoxesHeight > graphHeight ){
+			//Boxes in percent
+			
+			int nextY = yFloor;
+			for (GraphBox box : boxes) {
+				
+				//Total size of the box
+				int sizeT = box.size + box.grow + box.votes;
+				
+				//One box in percent
+				double percent = sizeT / allBoxesHeight;
+				
+				//Box size in percent converted to box size relative to the max height
+				sizeT = (int) Math.floor(percent*graphHeight);
+				
+				g2.setColor(box.color);
+				g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT);
+				nextY -= (sizeT);
+			}
+			
+		}else{
+			//Boxes in px
+			
+			int nextY = yFloor;
+			for (GraphBox box : boxes) {
+				int sizeT = box.size + box.grow + box.votes;
+				g2.setColor(box.color);
+				g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT);
+				nextY -= (sizeT);
+			}
+		}
 	}
-
+	
 	@Override
 	public void updateData(FirebaseData data) {
 		// TODO Auto-generated method stub
@@ -85,30 +106,46 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		
 		//Stoppa in storlekarna i rutorna
 		
-		boxes.get(0).setSize((int) (50 + fbData.getVote1()*2));
-		boxes.get(1).setSize((int) (50 + fbData.getVote2()*2));
-		boxes.get(2).setSize((int) (50 + fbData.getVote3()*2));
+		boxes.get(0).update((int) (fbData.getVote1()*2));
+		boxes.get(1).update((int) (fbData.getVote2()*2));
+		boxes.get(2).update((int) (fbData.getVote3()*2));
 		
 		myLabel.setText(fbData.getQuestion());
 		repaint();
 	}
 	
+	ActionListener taskPerformer = new ActionListener() {
+		public void actionPerformed(ActionEvent evt) {
+			if(boxes.size() == 0){
+
+			}else{
+				for(GraphBox box : boxes){
+					//box.update();
+				}
+				repaint();
+			}
+		}
+	};
+	
 	class GraphBox{
 		//xPos is centered, yPos is on the top
-		int size;
+		int size = 50; //Initial size
+		int grow = 0;
 		int xPos;
 		int yPos;
 		Color color;
+		int votes;
 		
-		GraphBox(int size, int yPos, Color color){
-			this.size = size;
+		GraphBox(Color color){
 			this.xPos = xAlign - (size/2);
-			this.yPos = yPos;
 			this.color = color;
 		}
 		void setSize(int size){
 			this.size = size;
 			xPos = xAlign - (size/2);
+		}
+		void update(int votes){
+			this.votes = votes*2;
 		}
 		
 	}

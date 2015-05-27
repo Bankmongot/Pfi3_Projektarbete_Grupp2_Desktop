@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import se.mah.k3.Themes.CircleTheme;
 import se.mah.k3.Themes.DummyTheme;
+import se.mah.k3.Themes.Havs;
 import se.mah.k3.Themes.StarTheme;
 import se.mah.k3.Themes.VerticalBoxes;
 
@@ -73,6 +74,14 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new VerticalBoxes();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
+			break;
+		case "Havs":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new Havs();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
