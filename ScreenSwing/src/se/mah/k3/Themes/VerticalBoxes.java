@@ -53,6 +53,8 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		//Denna metoden behöver städas
 		Graphics2D g2 = (Graphics2D)g;
 		
 		g2.fillRect(500, 500, 50, 50);
@@ -69,19 +71,15 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 			
 			int nextY = yFloor;
 			for (GraphBox box : boxes) {
+				
+				//Total size of the box
 				int sizeT = box.size + box.grow + box.votes;
-				System.out.println(sizeT + " / " + allBoxesHeight);
 				
-				
+				//One box in percent
 				double percent = sizeT / allBoxesHeight;
-				System.out.println("= " + percent + " * " + graphHeight);
 				
-				
+				//Box size in percent converted to box size relative to the max height
 				sizeT = (int) Math.floor(percent*graphHeight);
-				System.out.println(sizeT);
-				System.out.println();
-				
-				
 				
 				g2.setColor(box.color);
 				g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT);
@@ -98,36 +96,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 				g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT);
 				nextY -= (sizeT);
 			}
-			
-			
-			
 		}
-		
-		
-		
-		
-		//g.drawString(fbData.getQuestion(), 100, 30);
-		//g.drawString(String.valueOf(fbData.getVote1()), 25, 35);
-		
-//		int y = 50;
-//		for (GraphBox box : boxes) {
-//			g.setColor(box.color);
-//			g.fillRect(box.xPos, y, box.size, box.size);
-//			y += box.size;
-//			box.yPos = y;
-//		}
-//		//g.fillRect(100, 10, 60, 50);
-//		
-//		g.setColor(Color.black);
-//		g.drawString(fbData.getAlt1(), 100, (boxes.get(0).yPos)-(boxes.get(0).size/2));
-//		g.drawString(fbData.getAlt2(), 100, (boxes.get(1).yPos)-(boxes.get(1).size/2));
-//		g.drawString(fbData.getAlt3(), 100, (boxes.get(2).yPos)-(boxes.get(2).size/2));
-//		
-//		g.drawString(String.valueOf(fbData.getVote1()), xAlign-5, (boxes.get(0).yPos)-(boxes.get(0).size/2));
-//		g.drawString(String.valueOf(fbData.getVote2()), xAlign-5, (boxes.get(1).yPos)-(boxes.get(1).size/2));
-//		g.drawString(String.valueOf(fbData.getVote3()), xAlign-5, (boxes.get(2).yPos)-(boxes.get(2).size/2));
 	}
-
+	
 	@Override
 	public void updateData(FirebaseData data) {
 		// TODO Auto-generated method stub
