@@ -1,12 +1,8 @@
 package se.mah.k3;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Vector;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -27,9 +23,9 @@ public class FireBase {
 
 	
 	public FireBase(){
-		themeInterface = FullScreen.setUpTheme("ThemeOfCircles");  //Default screen
+		themeInterface = FullScreen.setUpTheme("Circles");  //Default screen
 		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/");
-		myFirebaseRef.removeValue(); //Cleans out everything
+		//myFirebaseRef.removeValue(); //Cleans out everything
 		myFirebaseRef.child("ScreenNbr").setValue(145); //Has to be same as on the app. So place specific can't you see the screen you don't know the number
     	myFirebaseRef.child("Active").setValue(Constants.falseValue);
 		fbData = new FirebaseData();
