@@ -1,13 +1,14 @@
 package se.mah.k3;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class FirebaseData {
 	private String theme = "Circles";
 	private String question = "-";
 	private String creator = "-";
 	private String date = "_";
-	private HashMap<String, Integer> inData;
+	private ArrayList<String> answers = new ArrayList<String>();
+	private ArrayList<Integer> votes = new ArrayList<Integer>();
 	
 	//Temp shit
 	private long Vote1;
@@ -22,6 +23,22 @@ public class FirebaseData {
 	
 	
 
+	public ArrayList<String> getAnswers() {
+		return answers;
+	}
+	
+	public void setAnswers(ArrayList<String> answers) {
+		this.answers = answers;
+	}
+	
+	public ArrayList<Integer> getVotes() {
+		return votes;
+	}
+	
+	public void setVotes(ArrayList<Integer> votes) {
+		this.votes = votes;
+	}
+	
 	public String getQuestion() {
 		return question;
 	}
@@ -52,14 +69,6 @@ public class FirebaseData {
 
 	public void setTheme(String theme) {
 		this.theme = theme;
-	}
-
-	public HashMap<String, Integer> getInData() {
-		return inData;
-	}
-
-	public void setInData(HashMap<String, Integer> inData) {
-		this.inData = inData;
 	}
 
 	public long getVote1() {
