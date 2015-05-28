@@ -31,7 +31,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	int yFloor = 625;
 	int graphHeight = 600;
 	int xAlign = 512; //Where all the boxes should be x-wise
-
+	int barOffset = 150;
 
 	JLabel myLabel;
 	GraphBox box;
@@ -88,6 +88,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 		int numOfBoxes = boxes.size(); //Antal boxar
 		double allBoxesHeight = 0.0;   //Initsiera variablen för alla boxars höjd. Måste vara en double.
+		double biggestBoxPercent = 0.0;
 
 		//Räkna ihop höjden, hitta största boxens storlek
 		for (GraphBox box : boxes) {
@@ -95,28 +96,37 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 			allBoxesHeight += temp;
 			if (temp > biggestBox) biggestBox = temp;
 		}
+		for (GraphBox box : boxes) {
+			int temp = (box.size + box.grow + box.votes);
+			double tempPercent = temp / allBoxesHeight;
+			double foo =  (int) Math.floor(tempPercent*graphHeight); 
+			if (foo > biggestBoxPercent) biggestBoxPercent = foo;
+		}
+		
 		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
 
 		//Bar on left
 		g2.setColor(Color.black);
-		g2.fillRect(xAlign - (biggestBox/2) - 100, yFloor-graphHeight, 10, graphHeight);
+		g2.fillRect((int)(xAlign - (biggestBoxPercent/2) - barOffset), yFloor-graphHeight, 10, graphHeight);
 
 		int nextY = yFloor; //Startpositionen för boxar, nerifrån
 
 		//Loopa igenom alla boxar
 		for (GraphBox box : boxes) {
 			int sizeT = box.size + box.grow + box.votes; //Räkna ihop den totala storleken av en box.
-
+			double percent = 0;
 			//Om boxarnas höjd tillsamman är över den tillåtna storleken, räkna om boxarnsas induviduella storlek till procent.
-			if(allBoxesHeight > graphHeight){
-				double percent = sizeT / allBoxesHeight; //One box in percent.
+			if(allBoxesHeight > graphHeight || true){
+				percent = sizeT / allBoxesHeight; //One box in percent.
 				sizeT = (int) Math.floor(percent*graphHeight); //Box size in percent converted to box size relative to the max height.
 			}
 
 			//g2.setColor(box.color); //Ställ in boxens färg.
+			g2.fillRect((int)(xAlign - (biggestBoxPercent/2) - barOffset), nextY-((sizeT+10)/2), 30, 10);
 			//g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT); //Rita ut boxen centrerat i x-led, med botten som utgångspunkt i y-led.
 			g2.drawImage(iceCube, xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT, this);
-			g2.drawString(box.awnser, (xAlign + (biggestBox/2) + 50), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
+			g2.drawString(box.awnser, (int)(xAlign + (biggestBoxPercent/2)) + 50 , nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
+			g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBoxPercent/2)) - (barOffset - 40)), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Procent
 
 			nextY -= (sizeT); //Ta bort boxens storlek från y värdet så att nästa box hamnar ovan på.
 		}
