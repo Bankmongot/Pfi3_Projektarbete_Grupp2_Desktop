@@ -51,8 +51,10 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
 		JLabel lblImage = new JLabel("");
-		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImage.setAlignmentX(Component.CENTER_ALIGNMENT);
 		lblImage.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogoLarge.png")));
+		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImage.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(lblImage);
 		
 		JPanel panel_1 = new JPanel();
