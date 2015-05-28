@@ -44,11 +44,6 @@ import javax.swing.SwingConstants;
    Blue.setBounds(576, 433, 88, 50);
    add(Blue);
    
-   JLabel Green = new JLabel("");
-   Green.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/green.png")));
-   Green.setBounds(218, 422, 97, 50);
-   add(Green);
-   
    JLabel Orange = new JLabel("");
    Orange.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/orange.png")));
    Orange.setBounds(781, 407, 88, 50);
@@ -56,8 +51,9 @@ import javax.swing.SwingConstants;
    
    JLabel Red = new JLabel("");
    Red.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/red.png")));
-   Red.setBounds(417, 394, 88, 50);
+   Red.setBounds(417, 393, 88, 50);
    add(Red);
+
 
    //Rubrik
    myLabel = new JLabel("New label");
@@ -118,6 +114,11 @@ import javax.swing.SwingConstants;
    label_2.setBounds(780, 167, 107, 318);
    add(label_2);
    
+   JLabel lblNewLabel_1 = new JLabel("");
+   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/green.png")));
+   lblNewLabel_1.setBounds(0, 167, 283, 342);
+   add(lblNewLabel_1);
+   
        }
        	
     	public void paintComponent(Graphics g) {
@@ -135,7 +136,5 @@ import javax.swing.SwingConstants;
 			   myLabel.setText(fbData.getQuestion());
 			   repaint();
 			}
-			// TODO Auto-generated method stub
-			
 		}
   
