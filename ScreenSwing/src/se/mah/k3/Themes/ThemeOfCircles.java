@@ -30,8 +30,10 @@ import javax.swing.JPanel;
 import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
 import se.mah.k3.Themes.VerticalBoxes.GraphBox;
+import javax.swing.ImageIcon;
 
-    public class ThemeOfCircles extends JPanel implements ThemeInterface {
+public class ThemeOfCircles extends JPanel implements ThemeInterface {
+
     FirebaseData fbData;
     JLabel myLabel;
 
@@ -54,15 +56,20 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
         setPreferredSize(new Dimension(1080,560));
         setMinimumSize(new Dimension(1080,560));
 
-        Ovals.add(new GraphOval(200, 50, Color.red));
-        Ovals.add(new GraphOval(200, 100, Color.green));
-        Ovals.add(new GraphOval(200, 130, Color.blue));
+        Ovals.add(new GraphOval(200, 50, 25, Color.red));
+        Ovals.add(new GraphOval(200, 100,30, Color.green));
+        Ovals.add(new GraphOval(200, 130,70, Color.blue));
 
 
 		myLabel = new JLabel("New label");
         myLabel.setBounds(161, 224, 207, 16);
         myLabel.setText("The question will appear here!");
         add(myLabel);
+        
+        JLabel lblNewLabel = new JLabel("New label");
+        lblNewLabel.setIcon(new ImageIcon(ThemeOfCircles.class.getResource("/images/gaussian_blur_1920x1440.jpg")));
+        lblNewLabel.setBounds(0, 0, 1079, 560);
+        add(lblNewLabel);
 
 	}
      
@@ -104,12 +111,13 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
     	   int yPos;
     	   Color color;
 
-           GraphOval(int size, int yPos, Color color){
+           GraphOval(int size, int xPos, int yPos, Color color){
            this.size = size;
            int xAlign;
            //this.xPos = xAlign - (size/2);
            this.yPos = yPos;
            this.color = color;
+           this.xPos = xPos;
 
 		}
            void setSize(int size){
@@ -121,5 +129,4 @@ import se.mah.k3.Themes.VerticalBoxes.GraphBox;
 
 
 	}
-
 }
