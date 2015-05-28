@@ -13,12 +13,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import se.mah.k3.FirebaseData;
-import se.mah.k3.Helpers;
 import se.mah.k3.ThemeInterface;
 
 public class VerticalBoxes extends JPanel implements ThemeInterface {

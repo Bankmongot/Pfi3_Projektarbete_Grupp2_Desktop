@@ -1,12 +1,8 @@
 package se.mah.k3;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Vector;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
