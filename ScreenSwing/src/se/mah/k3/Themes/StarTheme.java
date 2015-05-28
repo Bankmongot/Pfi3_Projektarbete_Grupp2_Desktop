@@ -161,8 +161,8 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-3.png")), (int) (width/8*3-200), 650, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-4.png")), (int) (width/8*4-200), 400, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-5.png")), (int) (width/8*5-200), 600, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-6.png")), (int) (width/8*6-200), 150, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-7.png")), (int) (width/8*7-200), 450, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-6.png")), (int) (width/8*6-200), 250, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-7.png")), (int) (width/8*7-200), 550, 300, 300, null);
 		 
       //g.fillRect(0, 0, getWidth(), getHeight());
 		this.repaint();
