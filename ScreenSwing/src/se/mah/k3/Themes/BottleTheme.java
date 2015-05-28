@@ -32,11 +32,6 @@ import javax.swing.JTextField;
     	   
   	setBackground(Color.WHITE);
   	setLayout(null);
-   
-   JLabel lblNewLabel_2 = new JLabel("");
-   lblNewLabel_2.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue.png")));
-   lblNewLabel_2.setBounds(22, 11, 436, 535);
-   add(lblNewLabel_2);
 
    myLabel = new JLabel("New label");
    myLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -66,6 +61,7 @@ import javax.swing.JTextField;
    label_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/flaska2.png")));
    label_1.setBounds(552, 192, 107, 311);
    add(label_1);
+   
    
    JLabel lblAlt = new JLabel("Alt 1");
    lblAlt.setFont(new Font("Roboto Bk", Font.PLAIN, 15));
