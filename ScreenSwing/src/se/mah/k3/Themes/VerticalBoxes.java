@@ -34,6 +34,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	int barOffset = 150;
 
 	JLabel myLabel;
+	
 	GraphBox box;
 	List<GraphBox> boxes = new ArrayList<GraphBox>();
 	
@@ -42,6 +43,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	
 	Image iceCube;
 	Image bcgr;
+	
+	Font font = new Font("Roboto", Font.PLAIN, 36);
+	Font font2 = new Font("Roboto", Font.PLAIN, 36);
 
 	public VerticalBoxes(){
 
@@ -51,17 +55,20 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		setPreferredSize(new Dimension(1080,560));
 		setMinimumSize(new Dimension(1080,560));
 
+		myLabel = new JLabel("New label");
+		myLabel.setBounds(161, 224, 207, 16);
+		myLabel.setText("");
+		add(myLabel);
+		
 		boxes.add(new GraphBox(Color.blue));
 		boxes.add(new GraphBox(Color.orange));
 		boxes.add(new GraphBox(Color.yellow));
 
-		myLabel = new JLabel("New label");
-		myLabel.setBounds(161, 224, 207, 16);
-		myLabel.setText("The question will appear here!");
-		add(myLabel);
-		
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
+		
+		font = new Font("Roboto", Font.PLAIN, 36);
+		font2 = new Font("Roboto", Font.PLAIN, 46);
 	}
 
 	public void paintComponent(Graphics g) {
@@ -75,11 +82,11 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		windowHeight = dim.getHeight();
 		graphHeight = (int) (windowHeight - (windowHeight/3));
 		yFloor = (int) (windowHeight - (windowHeight / 12));
+		xAlign = (int) windowWidth / 3;
 
 		Graphics2D g2 = (Graphics2D)g; //Skapa grafikobjekt
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		Font font = new Font("Roboto", Font.PLAIN, 36);
 		g2.setFont(font);
 		FontMetrics fm = g2.getFontMetrics();
 		int fontHeight = fm.getAscent();
@@ -125,11 +132,13 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 			g2.fillRect((int)(xAlign - (biggestBoxPercent/2) - barOffset), nextY-((sizeT+10)/2), 30, 10);
 			//g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT); //Rita ut boxen centrerat i x-led, med botten som utgångspunkt i y-led.
 			g2.drawImage(iceCube, xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT, this);
-			g2.drawString(box.awnser, (int)(xAlign + (biggestBoxPercent/2)) + 50 , nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
+			g2.drawString(box.answer, (int)(xAlign + (biggestBoxPercent/2)) + 50 , nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
 			g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBoxPercent/2)) - (barOffset - 40)), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Procent
 
 			nextY -= (sizeT); //Ta bort boxens storlek från y värdet så att nästa box hamnar ovan på.
 		}
+		g2.setFont(font2);
+		g2.drawString("What question should we ask?", 50, 50); 
 	}
 
 	@Override
@@ -142,8 +151,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		boxes.get(0).update((int) (fbData.getVote1()*2));
 		boxes.get(1).update((int) (fbData.getVote2()*2));
 		boxes.get(2).update((int) (fbData.getVote3()*2));
-
+		
 		myLabel.setText(fbData.getQuestion());
+		myLabel.setText(""); //Behövs för att temat ska visas direkt
 		repaint();
 	}
 
@@ -168,7 +178,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		int yPos;
 		Color color;
 		int votes;
-		String awnser = "Placeholder awnswer.";
+		String answer = "Placeholder answer.";
 
 		GraphBox(Color color){
 			this.xPos = xAlign - (size/2);
