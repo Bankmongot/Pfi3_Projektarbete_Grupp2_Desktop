@@ -1,5 +1,6 @@
 package se.mah.k3.Themes;
 
+import java.awt.AWTError;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -55,9 +56,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-		boxes.add(new GraphBox("Placeholder answer."));
-		boxes.add(new GraphBox("Placeholder answer."));
-		boxes.add(new GraphBox("Placeholder answer."));
+		boxes.add(new GraphBox("Loading answer..."));
+		boxes.add(new GraphBox("Loading answer..."));
+		boxes.add(new GraphBox("Loading answer..."));
 
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
@@ -84,11 +85,13 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		int fontHeight = fm.getAscent(); //Height of font
 		double biggestBox = 0.0; //Biggest box needed to align text nicely
 		double allBoxesHeight = 0.0; //Total height of all the boxes, must be double: using it for division.
+		int totalVotes = 0;
 
-		//Add size of all boxes to allBoxesHeight
+		//Add size of all boxes to allBoxesHeight and calc totalVotes
 		for (GraphBox box : boxes) {
-			int boxSize = box.votes;
-			allBoxesHeight += boxSize;
+			int votes = box.votes;
+			allBoxesHeight += votes;
+			totalVotes += votes;
 		}
 
 		//Find the biggest box 
@@ -117,16 +120,17 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 				g2.fillRect((int)(xAlign - (biggestBox/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
 				g2.drawImage(iceCube, xAlign - (size/2), nextY-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
-				g2.drawString(box.answer, (int)(xAlign + (biggestBox/2)) + 50 , nextY-(size/2)+(fontHeight/2)); // Answer, aligned by the biggest box
-				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), nextY-(size/2)+(fontHeight/2)); //Votes in %, -||-
+				g2.drawString(box.answer, (int)(xAlign + (biggestBox/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest box
+				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
 				nextY -= size; //Subtracts the current box's size, allowing the next box to be placed on top
 			}
 		}
-		g2.setFont(font2); //Set the font for the title
-		g2.drawString("What question should we ask?", 50, 50);  //The title //TODO: Positioning
 		
-		//TODO: Total number of votes
+		g2.drawString(String.valueOf(totalVotes), (int)(xAlign - (biggestBox/2) - barOffset - 10 - fm.stringWidth(String.valueOf(totalVotes))), yFloor); //Total number of votes
+		
+		g2.setFont(font2); //Set the font for the title
+		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
 	}
 
 	@Override
@@ -134,9 +138,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		fbData = data;
 
 		//Add data to boxes
-		boxes.get(0).update((int) (fbData.getVote1()*2));
-		boxes.get(1).update((int) (fbData.getVote2()*2));
-		boxes.get(2).update((int) (fbData.getVote3()*2));
+		boxes.get(0).update((int) (fbData.getVote3()), fbData.getAlt3());
+		boxes.get(1).update((int) (fbData.getVote2()), fbData.getAlt2());
+		boxes.get(2).update((int) (fbData.getVote1()), fbData.getAlt1());
 
 		//Ugly fix to automatically show the theme when it's launched.
 		myLabel.setText(fbData.getQuestion());
@@ -149,12 +153,11 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		int votes;
 		String answer;
 
-		GraphBox(String a){
-			this.answer = a;
-		}
-		void update(int votes){
+		GraphBox(String a){ this.answer = a; }
+		void update(int votes, String answer){ 
 			this.votes = votes;
+			this.answer = answer;
+		
 		}
-
 	}
 }

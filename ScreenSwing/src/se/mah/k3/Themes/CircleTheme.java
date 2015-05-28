@@ -1,26 +1,32 @@
 package se.mah.k3.Themes;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-import se.mah.k3.Constants;
-import se.mah.k3.FirebaseData;
-import se.mah.k3.ThemeInterface;
 import se.mah.k3.*;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.DropMode;
+
+import java.awt.BorderLayout;
+
+import javax.swing.BoxLayout;
+import java.awt.Component;
 
 
 
@@ -36,27 +42,31 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 	
 	public CircleTheme() {
 		setBackground(Color.WHITE);
-		setLayout(null);
-		
-		JLabel lblNoCurrentSurvey = new JLabel("No current survey");
-		lblNoCurrentSurvey.setBounds(500, 650, 351, 57);
-		lblNoCurrentSurvey.setForeground(Color.BLACK);
-		
-		add(lblNoCurrentSurvey);
-		lblNoCurrentSurvey.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNoCurrentSurvey.setFont(new Font("Roboto Cn", Font.PLAIN, 35));
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setBounds(300, 0, 900, 700);
-		add(lblNewLabel);
-		lblNewLabel.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogoLarge.png")));
+		setPreferredSize(new Dimension(1920,1080));
+		setMinimumSize(new Dimension(1920,1080));
+		setLayout(new GridBagLayout());
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.WHITE);
-		panel.setBounds(0, 0, 2000,1080);
-		add(panel);
-		panel.setLayout(null);
-		System.out.println("Created DrawPanel");
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 		
+		JLabel lblImage = new JLabel("");
+		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
+		lblImage.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogoLarge.png")));
+		panel.add(lblImage);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.WHITE);
+		panel.add(panel_1);
+		
+		JLabel lblNoCurrentSurvey = new JLabel("No current survey");
+		panel_1.add(lblNoCurrentSurvey);
+		lblNoCurrentSurvey.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblNoCurrentSurvey.setHorizontalAlignment(JLabel.CENTER);
+		lblNoCurrentSurvey.setFont(new Font("Roboto Cn", Font.PLAIN, 35));
+		lblNoCurrentSurvey.setForeground(Color.BLACK);
+		
+		add(panel, new GridBagConstraints());
 	}
 
 	
@@ -126,10 +136,5 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 			//invalidate();
 			repaint();
 		}
-
-
-
-
-
 }
 	
