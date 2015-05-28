@@ -155,13 +155,13 @@ public class StarTheme extends JPanel implements ThemeInterface {
 	protected void paintComponent(Graphics g) {
 		 //g.setColor(getBackground()); // x , y , w, h , let stay null
 		super.paintComponent(g);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-01.png")), (int) (width/8*1-150), 400, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-02.png")), (int) (width/8*2), 250, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-03.png")), (int) (width/8*3-200), 650, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-04.png")), (int) (width/8*4-200), 400, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-05.png")), (int) (width/8*5-200), 600, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-06.png")), (int) (width/8*6-200), 200, 300, 300, null);
-		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-07.png")), (int) (width/8*7-200), 500, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-1.png")), (int) (width/8*1-150), 400, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-2.png")), (int) (width/8*2), 250, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-3.png")), (int) (width/8*3-200), 650, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-4.png")), (int) (width/8*4-200), 400, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-5.png")), (int) (width/8*5-200), 600, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-6.png")), (int) (width/8*6-200), 200, 300, 300, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-7.png")), (int) (width/8*7-200), 500, 300, 300, null);
        //g.fillRect(0, 0, getWidth(), getHeight());
 		this.repaint();
 	}
