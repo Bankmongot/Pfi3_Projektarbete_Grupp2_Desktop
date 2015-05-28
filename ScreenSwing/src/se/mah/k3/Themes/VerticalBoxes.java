@@ -6,7 +6,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,6 +36,12 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	JLabel myLabel;
 	GraphBox box;
 	List<GraphBox> boxes = new ArrayList<GraphBox>();
+	
+	double windowWidth;
+	double windowHeight;
+	
+	Image iceCube;
+	Image bcgr;
 
 	public VerticalBoxes(){
 
@@ -50,13 +59,22 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		myLabel.setBounds(161, 224, 207, 16);
 		myLabel.setText("The question will appear here!");
 		add(myLabel);
+		
+		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
+		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		//Denna metoden behöver städas
-
+		
+		
+		Dimension dim = this.getSize();
+		windowWidth = dim.getWidth();
+		windowHeight = dim.getHeight();
+		graphHeight = (int) (windowHeight - (windowHeight/3));
+		yFloor = (int) (windowHeight - (windowHeight / 12));
 
 		Graphics2D g2 = (Graphics2D)g; //Skapa grafikobjekt
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -66,8 +84,8 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		FontMetrics fm = g2.getFontMetrics();
 		int fontHeight = fm.getAscent();
 		int biggestBox = 0; //Biggest box needed to align text nicely
-		
-		
+
+
 		int numOfBoxes = boxes.size(); //Antal boxar
 		double allBoxesHeight = 0.0;   //Initsiera variablen för alla boxars höjd. Måste vara en double.
 
@@ -77,23 +95,29 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 			allBoxesHeight += temp;
 			if (temp > biggestBox) biggestBox = temp;
 		}
-		
+		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
+
+		//Bar on left
+		g2.setColor(Color.black);
+		g2.fillRect(xAlign - (biggestBox/2) - 100, yFloor-graphHeight, 10, graphHeight);
+
 		int nextY = yFloor; //Startpositionen för boxar, nerifrån
-		
+
 		//Loopa igenom alla boxar
 		for (GraphBox box : boxes) {
 			int sizeT = box.size + box.grow + box.votes; //Räkna ihop den totala storleken av en box.
-			
+
 			//Om boxarnas höjd tillsamman är över den tillåtna storleken, räkna om boxarnsas induviduella storlek till procent.
 			if(allBoxesHeight > graphHeight){
 				double percent = sizeT / allBoxesHeight; //One box in percent.
 				sizeT = (int) Math.floor(percent*graphHeight); //Box size in percent converted to box size relative to the max height.
 			}
-			
-			g2.setColor(box.color); //Ställ in boxens färg.
-			g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT); //Rita ut boxen centrerat i x-led, med botten som utgångspunkt i y-led.
-			g2.drawString(box.awnser, (xAlign + (biggestBox/2) + 20), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
-			
+
+			//g2.setColor(box.color); //Ställ in boxens färg.
+			//g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT); //Rita ut boxen centrerat i x-led, med botten som utgångspunkt i y-led.
+			g2.drawImage(iceCube, xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT, this);
+			g2.drawString(box.awnser, (xAlign + (biggestBox/2) + 50), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
+
 			nextY -= (sizeT); //Ta bort boxens storlek från y värdet så att nästa box hamnar ovan på.
 		}
 	}
