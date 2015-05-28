@@ -3,6 +3,7 @@ package se.mah.k3;
 import java.util.ArrayList;
 
 public class FirebaseData {
+	private String activeID;
 	private String theme = "Circles";
 	private String question = "-";
 	private String creator = "-";
@@ -15,11 +16,15 @@ public class FirebaseData {
 	private long Vote2;
 	private long Vote3;
 	private long Vote4;
+	private long Vote5;
+	private long Vote6;
 	
 	private String alt1;
 	private String alt2;
 	private String alt3;
 	private String alt4;
+	private String alt5;
+	private String alt6;
 	
 	
 
@@ -134,6 +139,48 @@ public class FirebaseData {
 	public void setAlt4(String alt4) {
 		this.alt4 = alt4;
 	}
+
+	public String getActiveID() {
+		return activeID;
+	}
+
+	public void setActiveID(String activeID) {
+		this.activeID = activeID;
+	}
+
+	public String getAlt5() {
+		return alt5;
+	}
+
+	public void setAlt5(String alt5) {
+		this.alt5 = alt5;
+	}
+
+	public String getAlt6() {
+		return alt6;
+	}
+
+	public void setAlt6(String alt6) {
+		this.alt6 = alt6;
+	}
+
+	public long getVote5() {
+		return Vote5;
+	}
+
+	public void setVote5(long vote5) {
+		Vote5 = vote5;
+	}
+
+	public long getVote6() {
+		return Vote6;
+	}
+
+	public void setVote6(long vote6) {
+		Vote6 = vote6;
+	}
+
+
 
 	
 	
