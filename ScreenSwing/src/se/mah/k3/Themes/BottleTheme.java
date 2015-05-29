@@ -115,8 +115,8 @@ import javax.swing.SwingConstants;
    add(label_2);
    
    JLabel lblNewLabel_1 = new JLabel("");
-   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/green.png")));
-   lblNewLabel_1.setBounds(0, 167, 283, 342);
+   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue2.png")));
+   lblNewLabel_1.setBounds(27, 116, 202, 302);
    add(lblNewLabel_1);
    
        }
