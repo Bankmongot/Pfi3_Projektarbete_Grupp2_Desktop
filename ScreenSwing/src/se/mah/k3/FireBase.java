@@ -79,7 +79,7 @@ public class FireBase {
 	public void getID() {
 		System.out.println("getID started");
 
-		myFirebaseRef = new Firebase(
+		Firebase myFirebaseRef = new Firebase(
 				"https://popping-torch-1741.firebaseio.com/");
 
 		myFirebaseRef.addChildEventListener(new ChildEventListener() {
@@ -91,6 +91,7 @@ public class FireBase {
 					getActive(temp);
 				}
 
+				themeInterface.updateData(fbData);
 			}
 
 			@Override
@@ -122,17 +123,18 @@ public class FireBase {
 	public void getActive(String temp) {
 		final String theTemp = temp;
 
-		myFirebaseRef = new Firebase("https://popping-torch-1741.firebaseio.com/"+temp+"/Active");
-		
+		Firebase myFirebaseRef = new Firebase(
+				"https://popping-torch-1741.firebaseio.com/" + temp);
+
 		myFirebaseRef.addChildEventListener(new ChildEventListener() {
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
-				System.out.println(arg0);
-				System.out.println(arg1);
 
-				//Så här långt har jag kommit, vet inte varför datasnapshot INTE innehåller något värde alls...
-				//Firebase referensen är korrekt, IDt är korrekt... Men ändå inget data.
-				//I övrigt så ska resten utav programmet nog fungera hyffsat.
+				// Så här långt har jag kommit, vet inte varför datasnapshot
+				// INTE innehåller något värde alls...
+				// Firebase referensen är korrekt, IDt är korrekt... Men ändå
+				// inget data.
+				// I övrigt så ska resten utav programmet nog fungera hyffsat.
 
 			}
 
@@ -144,16 +146,17 @@ public class FireBase {
 
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
-				System.out.println(arg0);
-				System.out.println(arg1);
-				
-				boolean tempBool = (Boolean) arg0.getValue();
-				System.out.println(tempBool);
-				if (tempBool == true) {
-					fbData.setActiveID(theTemp);
-					System.out.println("The active is: " + theTemp);
-					getIDData();
+
+				if (arg0.getKey().equals("Active")) {
+					boolean tempBool = (Boolean) arg0.getValue();
+					System.out.println(tempBool);
+					if (tempBool == true) {
+						fbData.setActiveID(theTemp);
+						System.out.println("The active is: " + theTemp);
+						getIDData();
+					}
 				}
+				themeInterface.updateData(fbData);
 			}
 
 			@Override
@@ -172,94 +175,15 @@ public class FireBase {
 
 	public void getIDData() {
 		System.out.println("getIDData started");
-		myFirebaseRef = new Firebase(
+		final Firebase myFirebaseRef = new Firebase(
 				"https://popping-torch-1741.firebaseio.com/"
-						+ fbData.getActiveID() + "/Active");
+						+ fbData.getActiveID());
+		System.out.println("The url: " + myFirebaseRef);
 
 		myFirebaseRef.addChildEventListener(new ChildEventListener() {
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
-				Iterable<DataSnapshot> dsList = arg0.getChildren();
 
-				for (DataSnapshot dataSnapshot : dsList) {
-					if (dataSnapshot.getKey().equals("Question")) {
-						System.out.println("New Question: "
-								+ (String) dataSnapshot.getValue());
-						fbData.setQuestion((String) dataSnapshot.getValue());
-					}
-
-					if (dataSnapshot.getKey().equals("Theme")) {
-						// System.out.println("New theme: "+(String)dataSnapshot.getValue());
-						fbData.setTheme((String) dataSnapshot.getValue());
-						if (dataSnapshot.getValue() != null) {
-							myFirebaseRef.child("Active").setValue(true);
-						}
-					}
-
-					String alt1 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 1")) {
-						fbData.setAlt1((String) dataSnapshot.getValue());
-					}
-					String alt2 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 2")) {
-						fbData.setAlt2((String) dataSnapshot.getValue());
-					}
-					String alt3 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 3")) {
-						fbData.setAlt3((String) dataSnapshot.getValue());
-					}
-					String alt4 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 4")) {
-						fbData.setAlt4((String) dataSnapshot.getValue());
-					}
-
-					String alt5 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 5")) {
-						fbData.setAlt5((String) dataSnapshot.getValue());
-					}
-
-					String alt6 = null;
-					if (dataSnapshot.child("Votes").getKey().equals("Alt: 6")) {
-						fbData.setAlt6((String) dataSnapshot.getValue());
-					}
-
-					long vote1 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote1")) {
-						fbData.setVote1(((long) dataSnapshot.getValue()));
-					}
-
-					long vote2 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote2")) {
-						fbData.setVote2(((long) dataSnapshot.getValue()));
-					}
-
-					long vote3 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote3")) {
-						fbData.setVote3(((long) dataSnapshot.getValue()));
-					}
-
-					long vote4 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote4")) {
-						fbData.setVote4(((long) dataSnapshot.getValue()));
-					}
-
-					long vote5 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote5")) {
-						fbData.setVote5(((long) dataSnapshot.getValue()));
-					}
-
-					long vote6 = 0;
-					if (dataSnapshot.child("Alternatives").getKey()
-							.equals("Vote6")) {
-						fbData.setVote6(((long) dataSnapshot.getValue()));
-					}
-					themeInterface.updateData(fbData);
-				}
 			}
 
 			@Override
@@ -271,6 +195,83 @@ public class FireBase {
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
 				// TODO Auto-generated method stub
+
+				// System.out.println("das " + arg0);
+
+				if (arg0.getKey().equals("Question")) {
+
+					fbData.setQuestion((String) arg0.getValue());
+				}
+
+				if (arg0.getKey().equals("Theme")) {
+
+					fbData.setTheme((String) arg0.getValue());
+					if (arg0.getValue() != null) {
+						myFirebaseRef.child("Active").setValue(true);
+					}
+				}
+
+				if (arg0.getKey().equals("Creator")) {
+					fbData.setCreator((String) arg0.getValue());
+				}
+
+				Iterable<DataSnapshot> dsList = arg0.getChildren();
+
+				for (DataSnapshot dataSnapshot : dsList) {
+
+					// System.out.println(dataSnapshot);
+
+					if (dataSnapshot.getKey().equals("Alt: 1")) {
+						fbData.setVote1((long) dataSnapshot.getValue());
+					}
+					if (arg0.getKey().equals("Alt: 2")) {
+						fbData.setVote2((long) arg0.getValue());
+					}
+
+					if (arg0.getKey().equals("Alt: 3")) {
+						fbData.setVote3((long) arg0.getValue());
+					}
+					if (arg0.getKey().equals("Alt: 4")) {
+						fbData.setVote4((long) arg0.getValue());
+					}
+
+					if (arg0.getKey().equals("Alt: 5")) {
+						fbData.setVote5((long) arg0.getValue());
+					}
+
+					if (arg0.getKey().equals("Alt: 6")) {
+						fbData.setVote6((long) arg0.getValue());
+					}
+
+					if (arg0.getKey().equals("Alt1")) {
+						System.out.println(arg0.getKey() + " "
+								+ (String) arg0.getValue());
+						fbData.setAlt1(((String) arg0.getValue()));
+					}
+
+					if (arg0.getKey().equals("Alt2")) {
+						fbData.setAlt2(((String) arg0.getValue()));
+					}
+
+					if (arg0.getKey().equals("Alt3")) {
+						fbData.setAlt3(((String) arg0.getValue()));
+					}
+
+					if (arg0.getKey().equals("Alt4")) {
+						fbData.setAlt4(((String) arg0.getValue()));
+					}
+
+					if (arg0.getKey().equals("Alt5")) {
+						fbData.setAlt5(((String) arg0.getValue()));
+					}
+
+					if (arg0.getKey().equals("Alt6")) {
+						fbData.setAlt6(((String) arg0.getValue()));
+					}
+
+				}
+
+				themeInterface.updateData(fbData);
 
 			}
 
@@ -286,6 +287,11 @@ public class FireBase {
 
 			}
 		});
+
+		if (!lastTheme.equals(fbData.getTheme())) {
+			themeInterface = FullScreen.setUpTheme(fbData.getTheme());
+			lastTheme = fbData.getTheme();
+		}
 	}
 
 	public class Reminder {
@@ -301,6 +307,7 @@ public class FireBase {
 				myFirebaseRef.child(fbData.getActiveID()).child("Active")
 						.setValue(false);
 				System.out.format("Time's up!%n");
+				themeInterface = FullScreen.setUpTheme("Circles");
 				timer.cancel(); // Terminate the timer thread
 			}
 		}

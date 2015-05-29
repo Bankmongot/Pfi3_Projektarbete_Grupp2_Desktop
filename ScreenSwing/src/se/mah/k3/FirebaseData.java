@@ -10,8 +10,7 @@ public class FirebaseData {
 	private String date = "_";
 	private ArrayList<String> answers = new ArrayList<String>();
 	private ArrayList<Integer> votes = new ArrayList<Integer>();
-	
-	//Temp shit
+
 	private long Vote1;
 	private long Vote2;
 	private long Vote3;
