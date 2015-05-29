@@ -35,12 +35,20 @@ public class FirebaseData {
 		this.answers = answers;
 	}
 	
+	public void addAnswer(String answer){
+		answers.add(answer);
+	}
+	
 	public ArrayList<Integer> getVotes() {
 		return votes;
 	}
 	
 	public void setVotes(ArrayList<Integer> votes) {
 		this.votes = votes;
+	}
+	
+	public void addVotes(int vote){
+		votes.add(vote);
 	}
 	
 	public String getQuestion() {
