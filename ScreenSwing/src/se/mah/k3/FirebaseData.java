@@ -36,6 +36,7 @@ public class FirebaseData {
 	}
 	
 	public void addAnswer(String answer){
+		System.out.println("fbData: " + answer);
 		answers.add(answer);
 	}
 	
