@@ -219,10 +219,10 @@ public class FireBase {
 
 				for (DataSnapshot dataSnapshot : dsList) {
 
-					// System.out.println(dataSnapshot);
+					System.out.println(dataSnapshot);
 
-					if (dataSnapshot.getKey().equals("Alt: 1")) {
-						fbData.setVote1((long) dataSnapshot.getValue());
+					if (arg0.getKey().equals("Alt: 1")) {
+						fbData.setVote1((long) arg0.getValue());
 					}
 					if (arg0.getKey().equals("Alt: 2")) {
 						fbData.setVote2((long) arg0.getValue());
@@ -244,8 +244,6 @@ public class FireBase {
 					}
 
 					if (arg0.getKey().equals("Alt1")) {
-						System.out.println(arg0.getKey() + " "
-								+ (String) arg0.getValue());
 						fbData.setAlt1(((String) arg0.getValue()));
 					}
 
