@@ -56,9 +56,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-		boxes.add(new GraphBox("Loading answer..."));
-		boxes.add(new GraphBox("Loading answer..."));
-		boxes.add(new GraphBox("Loading answer..."));
+//		boxes.add(new GraphBox("Loading answer..."));
+//		boxes.add(new GraphBox("Loading answer..."));
+//		boxes.add(new GraphBox("Loading answer..."));
 
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
@@ -136,21 +136,31 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	@Override
 	public void updateData(FirebaseData data) {
 		fbData = data;
-
-		//Add data to boxes
-		boxes.get(0).update((int) (fbData.getVote3()), fbData.getAlt3());
-		boxes.get(1).update((int) (fbData.getVote2()), fbData.getAlt2());
-		boxes.get(2).update((int) (fbData.getVote1()), fbData.getAlt1());
+		
+		ArrayList<String> answers = fbData.getAnswers();
+		ArrayList<Integer> votes = fbData.getVotes();
+		
+		System.out.println("Vertical boxes, updateData(). Data received: " + fbData.getAnswers());
+		if(boxes.isEmpty()){
+			for(int i = 0; i<answers.size(); i++){
+				boxes.add(new GraphBox(answers.get(i)));
+			}
+		}else{
+			//Add data to boxes
+			for(int i = 0; i<answers.size(); i++){
+				boxes.get(i).update((int) (votes.get(i)), answers.get(i));
+			}
+		}
 
 		//Ugly fix to automatically show the theme when it's launched.
-		myLabel.setText(fbData.getQuestion());
+		myLabel.setText( fbData.getQuestion() );
 		myLabel.setText("");
 
 		repaint();
 	}
 
 	class GraphBox{
-		int votes;
+		int votes = 0;
 		String answer;
 
 		GraphBox(String a){ this.answer = a; }
