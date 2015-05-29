@@ -1,5 +1,6 @@
 package se.mah.k3.Themes;
 
+import java.awt.AWTError;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -7,11 +8,8 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,159 +26,138 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 	FirebaseData fbData;
 	HashMap<String, Double> percent;
-	int yFloor = 625;
-	int graphHeight = 600;
-	int xAlign = 512; //Where all the boxes should be x-wise
+	int yFloor = 0;
+	int graphHeight = 0;
+	int xAlign = 0; //Where all the boxes should be x-wise
 	int barOffset = 150;
 
 	JLabel myLabel;
-	GraphBox box;
+
 	List<GraphBox> boxes = new ArrayList<GraphBox>();
-	
+
 	double windowWidth;
 	double windowHeight;
-	
+
 	Image iceCube;
 	Image bcgr;
 
+	Font font  = new Font("Roboto", Font.PLAIN, 36); //Answers
+	Font font2 = new Font("Roboto", Font.PLAIN, 36); //Question
+
 	public VerticalBoxes(){
 
-		//percent = Helpers.calcPercent(fbData.getInData());
-
 		setLayout(null);
-		setPreferredSize(new Dimension(1080,560));
-		setMinimumSize(new Dimension(1080,560));
+		setPreferredSize(new Dimension(1920,1080));
+		setMinimumSize(new Dimension(1920,1080));
 
-		boxes.add(new GraphBox(Color.blue));
-		boxes.add(new GraphBox(Color.orange));
-		boxes.add(new GraphBox(Color.yellow));
-
+		//Needed for ugly fix, displaying the graph instantly when a survey is started.
 		myLabel = new JLabel("New label");
 		myLabel.setBounds(161, 224, 207, 16);
-		myLabel.setText("The question will appear here!");
+		myLabel.setText("");
 		add(myLabel);
-		
+
+		boxes.add(new GraphBox("Loading answer..."));
+		boxes.add(new GraphBox("Loading answer..."));
+		boxes.add(new GraphBox("Loading answer..."));
+
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
+
+		font = new Font("Roboto", Font.PLAIN, 36);
+		font2 = new Font("Roboto", Font.PLAIN, 46);
 	}
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		//Denna metoden behöver städas
-		
-		
+		//Determining window-size on every repaint enables smooth re-scaling
 		Dimension dim = this.getSize();
 		windowWidth = dim.getWidth();
 		windowHeight = dim.getHeight();
 		graphHeight = (int) (windowHeight - (windowHeight/3));
 		yFloor = (int) (windowHeight - (windowHeight / 12));
+		xAlign = (int) windowWidth / 3;
 
-		Graphics2D g2 = (Graphics2D)g; //Skapa grafikobjekt
-		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
-		Font font = new Font("Roboto", Font.PLAIN, 36);
-		g2.setFont(font);
-		FontMetrics fm = g2.getFontMetrics();
-		int fontHeight = fm.getAscent();
-		int biggestBox = 0; //Biggest box needed to align text nicely
+		Graphics2D g2 = (Graphics2D)g; //Create the graphics2D object we'll use for drawing
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti aliasing, mainly for text
+		g2.setFont(font); //Font used for answers 
+		FontMetrics fm = g2.getFontMetrics(); //Needed to figure out size of the text
+		int fontHeight = fm.getAscent(); //Height of font
+		double biggestBox = 0.0; //Biggest box needed to align text nicely
+		double allBoxesHeight = 0.0; //Total height of all the boxes, must be double: using it for division.
+		int totalVotes = 0;
 
-
-		int numOfBoxes = boxes.size(); //Antal boxar
-		double allBoxesHeight = 0.0;   //Initsiera variablen för alla boxars höjd. Måste vara en double.
-		double biggestBoxPercent = 0.0;
-
-		//Räkna ihop höjden, hitta största boxens storlek
+		//Add size of all boxes to allBoxesHeight and calc totalVotes
 		for (GraphBox box : boxes) {
-			int temp = (box.size + box.grow + box.votes);
-			allBoxesHeight += temp;
-			if (temp > biggestBox) biggestBox = temp;
+			int votes = box.votes;
+			allBoxesHeight += votes;
+			totalVotes += votes;
 		}
+
+		//Find the biggest box 
 		for (GraphBox box : boxes) {
-			int temp = (box.size + box.grow + box.votes);
-			double tempPercent = temp / allBoxesHeight;
+			int boxSize = box.votes;
+			double tempPercent = boxSize / allBoxesHeight;
 			double foo =  (int) Math.floor(tempPercent*graphHeight); 
-			if (foo > biggestBoxPercent) biggestBoxPercent = foo;
+			if (foo > biggestBox) biggestBox = foo;
 		}
-		
+
+		//Draw background
 		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
 
 		//Bar on left
 		g2.setColor(Color.black);
-		g2.fillRect((int)(xAlign - (biggestBoxPercent/2) - barOffset), yFloor-graphHeight, 10, graphHeight);
+		g2.fillRect((int)(xAlign - (biggestBox/2) - barOffset), yFloor-graphHeight, 10, graphHeight);
 
-		int nextY = yFloor; //Startpositionen för boxar, nerifrån
+		int nextY = yFloor; //Used to draw boxes on top of each other. 
 
-		//Loopa igenom alla boxar
+		//
 		for (GraphBox box : boxes) {
-			int sizeT = box.size + box.grow + box.votes; //Räkna ihop den totala storleken av en box.
-			double percent = 0;
-			//Om boxarnas höjd tillsamman är över den tillåtna storleken, räkna om boxarnsas induviduella storlek till procent.
-			if(allBoxesHeight > graphHeight || true){
-				percent = sizeT / allBoxesHeight; //One box in percent.
-				sizeT = (int) Math.floor(percent*graphHeight); //Box size in percent converted to box size relative to the max height.
+			if (box.votes > 0){
+				int size = box.votes; //Box size.
+				double percent = size / allBoxesHeight; //One box in percent.
+				size = (int) Math.floor(percent*graphHeight); //Box size in percent converted to box size relative to the max height.
+
+				g2.fillRect((int)(xAlign - (biggestBox/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
+				g2.drawImage(iceCube, xAlign - (size/2), nextY-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+				g2.drawString(box.answer, (int)(xAlign + (biggestBox/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest box
+				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
+
+				nextY -= size; //Subtracts the current box's size, allowing the next box to be placed on top
 			}
-
-			//g2.setColor(box.color); //Ställ in boxens färg.
-			g2.fillRect((int)(xAlign - (biggestBoxPercent/2) - barOffset), nextY-((sizeT+10)/2), 30, 10);
-			//g2.fillRect(xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT); //Rita ut boxen centrerat i x-led, med botten som utgångspunkt i y-led.
-			g2.drawImage(iceCube, xAlign - (sizeT/2), nextY-sizeT, sizeT, sizeT, this);
-			g2.drawString(box.awnser, (int)(xAlign + (biggestBoxPercent/2)) + 50 , nextY-(sizeT/2)+(fontHeight/2)); //TODO: Svarsalternativen och antal röster
-			g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBoxPercent/2)) - (barOffset - 40)), nextY-(sizeT/2)+(fontHeight/2)); //TODO: Procent
-
-			nextY -= (sizeT); //Ta bort boxens storlek från y värdet så att nästa box hamnar ovan på.
 		}
+		
+		g2.drawString(String.valueOf(totalVotes), (int)(xAlign - (biggestBox/2) - barOffset - 10 - fm.stringWidth(String.valueOf(totalVotes))), yFloor); //Total number of votes
+		
+		g2.setFont(font2); //Set the font for the title
+		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
 	}
 
 	@Override
 	public void updateData(FirebaseData data) {
-		// TODO Auto-generated method stub
 		fbData = data;
 
-		//Stoppa in storlekarna i rutorna
+		//Add data to boxes
+		boxes.get(0).update((int) (fbData.getVote3()), fbData.getAlt3());
+		boxes.get(1).update((int) (fbData.getVote2()), fbData.getAlt2());
+		boxes.get(2).update((int) (fbData.getVote1()), fbData.getAlt1());
 
-		boxes.get(0).update((int) (fbData.getVote1()*2));
-		boxes.get(1).update((int) (fbData.getVote2()*2));
-		boxes.get(2).update((int) (fbData.getVote3()*2));
-
+		//Ugly fix to automatically show the theme when it's launched.
 		myLabel.setText(fbData.getQuestion());
+		myLabel.setText("");
+
 		repaint();
 	}
 
-	ActionListener taskPerformer = new ActionListener() {
-		public void actionPerformed(ActionEvent evt) {
-			if(boxes.size() == 0){
-
-			}else{
-				for(GraphBox box : boxes){
-					//box.update();
-				}
-				repaint();
-			}
-		}
-	};
-
 	class GraphBox{
-		//xPos is centered, yPos is on the top
-		int size = 50; //Initial size
-		int grow = 0;
-		int xPos;
-		int yPos;
-		Color color;
 		int votes;
-		String awnser = "Placeholder awnswer.";
+		String answer;
 
-		GraphBox(Color color){
-			this.xPos = xAlign - (size/2);
-			this.color = color;
+		GraphBox(String a){ this.answer = a; }
+		void update(int votes, String answer){ 
+			this.votes = votes;
+			this.answer = answer;
+		
 		}
-		void setSize(int size){
-			this.size = size;
-			xPos = xAlign - (size/2);
-		}
-		void update(int votes){
-			this.votes = votes*2;
-		}
-
 	}
 }
