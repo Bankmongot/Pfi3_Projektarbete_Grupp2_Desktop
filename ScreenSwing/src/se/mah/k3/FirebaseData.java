@@ -28,6 +28,13 @@ public class FirebaseData {
 	
 
 	public ArrayList<String> getAnswers() {
+		ArrayList<String> answers = new ArrayList<String>();
+		if(alt1 != null) answers.add(alt1);
+		if(alt2 != null) answers.add(alt2);
+		if(alt3 != null) answers.add(alt3);
+		if(alt4 != null) answers.add(alt4);
+		if(alt5 != null) answers.add(alt5);
+		if(alt6 != null) answers.add(alt6);
 		return answers;
 	}
 	
@@ -41,6 +48,13 @@ public class FirebaseData {
 	}
 	
 	public ArrayList<Integer> getVotes() {
+		ArrayList<Integer> votes = new ArrayList<Integer>();
+		votes.add((int) Vote1);
+		votes.add((int) Vote2);
+		votes.add((int) Vote3);
+		votes.add((int) Vote4);
+		votes.add((int) Vote5);
+		votes.add((int) Vote6);
 		return votes;
 	}
 	

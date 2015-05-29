@@ -223,60 +223,60 @@ public class FireBase {
 
 					if (dataSnapshot.getKey().equals("Alt: 1")) {
 						fbData.setVote1((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 					if (dataSnapshot.getKey().equals("Alt: 2")) {
 						fbData.setVote2((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt: 3")) {
 						fbData.setVote3((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 					if (dataSnapshot.getKey().equals("Alt: 4")) {
 						fbData.setVote4((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt: 5")) {
 						fbData.setVote5((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt: 6")) {
 						fbData.setVote6((long) dataSnapshot.getValue());
-						fbData.addVotes((int) dataSnapshot.getValue());
+						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt1")) {
 						fbData.setAlt1(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt2")) {
 						fbData.setAlt2(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt3")) {
 						fbData.setAlt3(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt4")) {
 						fbData.setAlt4(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt5")) {
 						fbData.setAlt5(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().equals("Alt6")) {
 						fbData.setAlt6(((String) dataSnapshot.getValue()));
-						fbData.addAnswer((String) dataSnapshot.getValue());
+						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
 				}

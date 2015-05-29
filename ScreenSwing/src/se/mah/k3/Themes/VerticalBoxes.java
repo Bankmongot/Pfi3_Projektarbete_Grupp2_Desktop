@@ -144,11 +144,13 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		if(boxes.isEmpty()){
 			for(int i = 0; i<answers.size(); i++){
 				boxes.add(new GraphBox(answers.get(i)));
+				System.out.println("Added box");
 			}
 		}else{
 			//Add data to boxes
 			for(int i = 0; i<answers.size(); i++){
 				boxes.get(i).update((int) (votes.get(i)), answers.get(i));
+				System.out.println("Updated box");
 			}
 		}
 
