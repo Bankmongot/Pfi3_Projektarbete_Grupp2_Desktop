@@ -11,12 +11,12 @@ public class FirebaseData {
 	private ArrayList<String> answers = new ArrayList<String>();
 	private ArrayList<Integer> votes = new ArrayList<Integer>();
 
-	private long Vote1;
-	private long Vote2;
-	private long Vote3;
-	private long Vote4;
-	private long Vote5;
-	private long Vote6;
+	private long Vote1 = 0;
+	private long Vote2 = 0;
+	private long Vote3 = 0;
+	private long Vote4 = 0;
+	private long Vote5 = 0;
+	private long Vote6 = 0;
 	
 	private String alt1;
 	private String alt2;
