@@ -61,10 +61,10 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		//		boxes.add(new GraphBox("Loading answer..."));
 
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
-		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
+		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackgroundLighter.png"));
 
 		font = new Font("Roboto", Font.PLAIN, 36);
-		font2 = new Font("Roboto", Font.PLAIN, 46);
+		font2 = new Font("Roboto", Font.PLAIN, 50);
 	}
 
 	public void paintComponent(Graphics g) {
