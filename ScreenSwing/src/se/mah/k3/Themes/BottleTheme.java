@@ -36,30 +36,6 @@ import javax.swing.SwingConstants;
     	setPreferredSize(new Dimension(1080,560));
 		setMinimumSize(new Dimension(1080,560));
 
-		
-   
-   //Färger 	
-    	
-   JLabel Blue = new JLabel("");
-   Blue.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue.png")));
-   Blue.setBounds(576, 433, 88, 50);
-   add(Blue);
-   
-   JLabel Orange = new JLabel("");
-   Orange.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/orange.png")));
-   Orange.setBounds(781, 407, 88, 50);
-   add(Orange);
-   
-   JLabel Red = new JLabel("");
-   Red.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/red.png")));
-   Red.setBounds(417, 393, 88, 50);
-   add(Red);
-   
-   JLabel lblNewLabel_1 = new JLabel("");
-   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue2.png")));
-   lblNewLabel_1.setBounds(234, 247, 202, 302);
-   add(lblNewLabel_1);
-
 
    //Rubrik
    myLabel = new JLabel("New label");
@@ -75,7 +51,7 @@ import javax.swing.SwingConstants;
    JLabel lblAlt = new JLabel("Alt 1");
    lblAlt.setFont(new Font("Roboto Bk", Font.PLAIN, 15));
    lblAlt.setHorizontalAlignment(SwingConstants.CENTER);
-   lblAlt.setBounds(218, 495, 97, 14);
+   lblAlt.setBounds(227, 469, 97, 14);
    add(lblAlt);
    
    JLabel lblAlt_1 = new JLabel("Alt 2");
@@ -95,30 +71,6 @@ import javax.swing.SwingConstants;
    lblAlt_3.setHorizontalAlignment(SwingConstants.CENTER);
    lblAlt_3.setBounds(781, 478, 107, 14);
    add(lblAlt_3);
-   
-   
-   
-   //Flaskor
-   
-   JLabel lblNewLabel = new JLabel("");
-   lblNewLabel.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/Flaska1.png")));
-   lblNewLabel.setBounds(224, 141, 107, 361);
-   add(lblNewLabel);
-   
-   JLabel label = new JLabel("");
-   label.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/flaska2.png")));
-   label.setBounds(414, 167, 107, 296);
-   add(label);
-   
-   JLabel label_1 = new JLabel("");
-   label_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/Flaska1.png")));
-   label_1.setBounds(576, 163, 107, 346);
-   add(label_1);
-   
-   JLabel label_2 = new JLabel("");
-   label_2.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/flaska2.png")));
-   label_2.setBounds(780, 167, 107, 318);
-   add(label_2);
    
        }
        	
