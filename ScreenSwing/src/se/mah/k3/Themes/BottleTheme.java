@@ -36,6 +36,7 @@ import javax.swing.SwingConstants;
     	setPreferredSize(new Dimension(1080,560));
 		setMinimumSize(new Dimension(1080,560));
 
+		
    
    //Färger 	
     	
