@@ -29,7 +29,9 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 	int yFloor = 0;
 	int graphHeight = 0;
 	int xAlign = 200; //Where all the circles should be x-wise
+	int yAlign = 200;
 	int barOffset = 150;
+	String question = "place holder question";
 
 	JLabel myLabel;
 
@@ -37,7 +39,8 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 	double windowWidth;
 	double windowHeight;
-
+	
+    Image clouds;
 
 
 	Font font  = new Font("Roboto", Font.PLAIN, 36); //Answers
@@ -45,6 +48,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 	public BloonsTheme(){
 
+		
 		setLayout(null);
 		setPreferredSize(new Dimension(1920,1080));
 		setMinimumSize(new Dimension(1920,1080));
@@ -55,11 +59,16 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-//			ovals.add(new GraphOval("Loading answer..."));
-//			ovals.add(new GraphOval("Loading answer..."));
-//			ovals.add(new GraphOval("Loading answer..."));
-
-
+		    /*ovals.add(new GraphOval("Loading answer..."));
+		    ovals.add(new GraphOval("Loading answer..."));
+		    ovals.add(new GraphOval("Loading answer..."));
+		   
+		    ovals.add(new GraphOval(200, 50, 25, Color.red));
+		    ovals.add(new GraphOval(200, 100,30, Color.green));
+		    ovals.add(new GraphOval(200, 130,70, Color.blue));
+		   
+*/
+		clouds = Toolkit.getDefaultToolkit().getImage(BloonsTheme.class.getResource("/images/clouds.png"));
 		font = new Font("Roboto", Font.PLAIN, 36);
 		font2 = new Font("Roboto", Font.PLAIN, 46);
 	}
@@ -75,6 +84,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		yFloor = (int) (windowHeight - (windowHeight / 12));
 		xAlign = (int) windowWidth / 3;
 
+		
 		Graphics2D g2 = (Graphics2D)g; //Create the graphics2D object we'll use for drawing
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti aliasing, mainly for text
 		g2.setFont(font); //Font used for answers 
@@ -100,12 +110,11 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		}
 
 		//Draw background
-		//g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
+		g2.drawImage(clouds, 0, 0, (int) windowWidth, (int) windowHeight, this);
 
 		//Bar on left
 		g2.setColor(Color.black);
-		g2.fillRect((int)(xAlign - (biggestOval/2) - barOffset), yFloor-graphHeight, 10, graphHeight);
-
+		
 		int nextY = yFloor; //Used to draw circles on top of each other. 
 
 		//
@@ -115,8 +124,8 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 				double percent = size / allOvalsHeight; //One circle in percent.
 				size = (int) Math.floor(percent*graphHeight); //circle size in percent converted to circle size relative to the max height.
 
-				g2.fillRect((int)(xAlign - (biggestOval/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
-				g2.fillOval(200, 200, 20, 20); //(xAlign - (size/2), nextY-size, size, size, this); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
+				
+				g2.fillOval(xAlign - (size/2), nextY-size, size, size); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
 				g2.drawString(oval.answer, (int)(xAlign + (biggestOval/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
 				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestOval/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
@@ -127,7 +136,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		g2.drawString(String.valueOf(totalVotes), (int)(xAlign - (biggestOval/2) - barOffset - 10 - fm.stringWidth(String.valueOf(totalVotes))), yFloor); //Total number of votes
 
 		g2.setFont(font2); //Set the font for the title
-		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
+		g2.drawString(question, 50, 50);  //The title //TODO: Positioning
 	}
 
 	@Override
@@ -136,11 +145,12 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 		ArrayList<String> answers = fbData.getAnswers();
 		ArrayList<Integer> votes = fbData.getVotes();
+		question = fbData.getQuestion();
 
-		System.out.println("Bloons theme, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
+		System.out.println("BloonsTheme, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
 
-		for(int i = ovals.size(); i<answers.size(); i++){
-			ovals.add(new GraphOval(answers.get(i)));
+		for (int i = ovals.size(); i<answers.size(); i++){
+			ovals.add(new GraphOval(answers.get(i), Color.red ));
 			System.out.println("Added oval");
 		}
 
@@ -165,7 +175,21 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		int votes = 0;
 		String answer;
 
-		GraphOval(String a){ this.answer = a; }
+		//xPos is centered, yPos is on the top 
+    	   int size;
+
+    	   Color color;
+
+           GraphOval (String a, Color color){
+           this.size = size;
+        //  int xAlign;
+        //  this.xPos = xAlign - (size/2);
+
+           this.color = color;
+        
+
+		}
+
 		void update(int votes, String answer){ 
 			this.votes = votes;
 			this.answer = answer;
