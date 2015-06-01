@@ -51,7 +51,7 @@ import javax.swing.SwingConstants;
    JLabel lblAlt = new JLabel("Alt 1");
    lblAlt.setFont(new Font("Roboto Bk", Font.PLAIN, 15));
    lblAlt.setHorizontalAlignment(SwingConstants.CENTER);
-   lblAlt.setBounds(218, 495, 97, 14);
+   lblAlt.setBounds(227, 469, 97, 14);
    add(lblAlt);
    
    JLabel lblAlt_1 = new JLabel("Alt 2");
