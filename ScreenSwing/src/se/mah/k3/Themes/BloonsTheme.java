@@ -125,7 +125,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 				size = (int) Math.floor(percent*graphHeight); //circle size in percent converted to circle size relative to the max height.
 
 				
-				g2.fillOval(xAlign, yAlign, 50, 50); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
+				g2.fillOval(xAlign - (size/2), nextY-size, size, size); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
 				g2.drawString(oval.answer, (int)(xAlign + (biggestOval/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
 				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestOval/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
