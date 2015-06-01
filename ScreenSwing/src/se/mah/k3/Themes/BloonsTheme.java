@@ -36,6 +36,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 	JLabel myLabel;
 
 	List<GraphOval> ovals = new ArrayList<GraphOval>();
+	
 
 	double windowWidth;
 	double windowHeight;
@@ -59,15 +60,15 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-		    /*ovals.add(new GraphOval("Loading answer..."));
-		    ovals.add(new GraphOval("Loading answer..."));
-		    ovals.add(new GraphOval("Loading answer..."));
+		  
+		    ovals.add(new GraphOval(new Color(23,23,23)));
+		    ovals.add(new GraphOval( new Color(24,24,24)));
+		    ovals.add(new GraphOval( new Color(25,25,25)));
+		    ovals.add(new GraphOval(new Color(26,26,26)));
+		    ovals.add(new GraphOval( new Color(27,27,27)));
+		    ovals.add(new GraphOval( new Color(28,28,28)));
 		   
-		    ovals.add(new GraphOval(200, 50, 25, Color.red));
-		    ovals.add(new GraphOval(200, 100,30, Color.green));
-		    ovals.add(new GraphOval(200, 130,70, Color.blue));
-		   
-*/
+
 		clouds = Toolkit.getDefaultToolkit().getImage(BloonsTheme.class.getResource("/images/clouds.png"));
 		font = new Font("Roboto", Font.PLAIN, 36);
 		font2 = new Font("Roboto", Font.PLAIN, 46);
@@ -117,14 +118,14 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		
 		int nextY = yFloor; //Used to draw circles on top of each other. 
 
-		//
+		
 		for (GraphOval oval : ovals) {
 			if (oval.votes > 0){
 				int size = oval.votes; //Circle size.
 				double percent = size / allOvalsHeight; //One circle in percent.
 				size = (int) Math.floor(percent*graphHeight); //circle size in percent converted to circle size relative to the max height.
 
-				
+				g2.setColor(oval.color);
 				g2.fillOval(xAlign - (size/2), nextY-size, size, size); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
 				g2.drawString(oval.answer, (int)(xAlign + (biggestOval/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
 				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestOval/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
@@ -150,7 +151,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		System.out.println("BloonsTheme, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
 
 		for (int i = ovals.size(); i<answers.size(); i++){
-			ovals.add(new GraphOval(answers.get(i), Color.red ));
+			ovals.add(new GraphOval( Color.red ));
 			System.out.println("Added oval");
 		}
 
@@ -180,10 +181,9 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
     	   Color color;
 
-           GraphOval (String a, Color color){
-           this.size = size;
-        //  int xAlign;
-        //  this.xPos = xAlign - (size/2);
+           GraphOval (Color color){
+
+
 
            this.color = color;
         
