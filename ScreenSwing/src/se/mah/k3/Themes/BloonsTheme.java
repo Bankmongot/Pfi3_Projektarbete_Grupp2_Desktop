@@ -62,11 +62,11 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 		  
 		    ovals.add(new GraphOval(new Color(23,23,23)));
-		    ovals.add(new GraphOval( new Color(24,24,24)));
-		    ovals.add(new GraphOval( new Color(25,25,25)));
+		    ovals.add(new GraphOval(new Color(24,24,24)));
+		    ovals.add(new GraphOval(new Color(25,25,25)));
 		    ovals.add(new GraphOval(new Color(26,26,26)));
-		    ovals.add(new GraphOval( new Color(27,27,27)));
-		    ovals.add(new GraphOval( new Color(28,28,28)));
+		    ovals.add(new GraphOval(new Color(27,27,27)));
+		    ovals.add(new GraphOval(new Color(28,28,28)));
 		   
 
 		clouds = Toolkit.getDefaultToolkit().getImage(BloonsTheme.class.getResource("/images/clouds.png"));
