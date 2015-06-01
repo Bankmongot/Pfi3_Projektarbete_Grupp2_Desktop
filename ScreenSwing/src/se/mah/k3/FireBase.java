@@ -221,60 +221,60 @@ public class FireBase {
 
 					System.out.println(dataSnapshot);
 
-					if (dataSnapshot.getKey().equals("Alt: 1")) {
+					if (dataSnapshot.getKey().startsWith("1:")) {
 						fbData.setVote1((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
-					if (dataSnapshot.getKey().equals("Alt: 2")) {
+					if (dataSnapshot.getKey().startsWith("2:")) {
 						fbData.setVote2((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt: 3")) {
+					if (dataSnapshot.getKey().startsWith("3:")) {
 						fbData.setVote3((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
-					if (dataSnapshot.getKey().equals("Alt: 4")) {
+					if (dataSnapshot.getKey().startsWith("4:")) {
 						fbData.setVote4((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt: 5")) {
+					if (dataSnapshot.getKey().startsWith("5:")) {
 						fbData.setVote5((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt: 6")) {
+					if (dataSnapshot.getKey().startsWith("6:")) {
 						fbData.setVote6((long) dataSnapshot.getValue());
 						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt1")) {
+					if (dataSnapshot.getKey().startsWith("1:")) {
 						fbData.setAlt1(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt2")) {
+					if (dataSnapshot.getKey().startsWith("2:")) {
 						fbData.setAlt2(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt3")) {
+					if (dataSnapshot.getKey().startsWith("3:")) {
 						fbData.setAlt3(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt4")) {
+					if (dataSnapshot.getKey().startsWith("4:")) {
 						fbData.setAlt4(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt5")) {
+					if (dataSnapshot.getKey().startsWith("5:")) {
 						fbData.setAlt5(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().equals("Alt6")) {
+					if (dataSnapshot.getKey().startsWith("6:")) {
 						fbData.setAlt6(((String) dataSnapshot.getValue()));
 						//fbData.addAnswer((String) dataSnapshot.getValue());
 					}
