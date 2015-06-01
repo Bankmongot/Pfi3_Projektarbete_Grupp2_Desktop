@@ -11,12 +11,12 @@ public class FirebaseData {
 	private ArrayList<String> answers = new ArrayList<String>();
 	private ArrayList<Integer> votes = new ArrayList<Integer>();
 
-	private long Vote1;
-	private long Vote2;
-	private long Vote3;
-	private long Vote4;
-	private long Vote5;
-	private long Vote6;
+	private long Vote1 = 0;
+	private long Vote2 = 0;
+	private long Vote3 = 0;
+	private long Vote4 = 0;
+	private long Vote5 = 0;
+	private long Vote6 = 0;
 	
 	private String alt1;
 	private String alt2;
@@ -28,6 +28,13 @@ public class FirebaseData {
 	
 
 	public ArrayList<String> getAnswers() {
+		ArrayList<String> answers = new ArrayList<String>();
+		if(alt1 != null) answers.add(alt1);
+		if(alt2 != null) answers.add(alt2);
+		if(alt3 != null) answers.add(alt3);
+		if(alt4 != null) answers.add(alt4);
+		if(alt5 != null) answers.add(alt5);
+		if(alt6 != null) answers.add(alt6);
 		return answers;
 	}
 	
@@ -36,10 +43,18 @@ public class FirebaseData {
 	}
 	
 	public void addAnswer(String answer){
+		System.out.println("fbData: " + answer);
 		answers.add(answer);
 	}
 	
 	public ArrayList<Integer> getVotes() {
+		ArrayList<Integer> votes = new ArrayList<Integer>();
+		votes.add((int) Vote1);
+		votes.add((int) Vote2);
+		votes.add((int) Vote3);
+		votes.add((int) Vote4);
+		votes.add((int) Vote5);
+		votes.add((int) Vote6);
 		return votes;
 	}
 	

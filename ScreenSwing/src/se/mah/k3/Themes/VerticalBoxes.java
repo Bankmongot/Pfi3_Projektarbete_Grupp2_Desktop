@@ -56,9 +56,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-		boxes.add(new GraphBox("Loading answer..."));
-		boxes.add(new GraphBox("Loading answer..."));
-		boxes.add(new GraphBox("Loading answer..."));
+		//		boxes.add(new GraphBox("Loading answer..."));
+		//		boxes.add(new GraphBox("Loading answer..."));
+		//		boxes.add(new GraphBox("Loading answer..."));
 
 		iceCube = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/blockTexture.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/gradientBackground.png"));
@@ -126,9 +126,9 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 				nextY -= size; //Subtracts the current box's size, allowing the next box to be placed on top
 			}
 		}
-		
+
 		g2.drawString(String.valueOf(totalVotes), (int)(xAlign - (biggestBox/2) - barOffset - 10 - fm.stringWidth(String.valueOf(totalVotes))), yFloor); //Total number of votes
-		
+
 		g2.setFont(font2); //Set the font for the title
 		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
 	}
@@ -137,27 +137,42 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 	public void updateData(FirebaseData data) {
 		fbData = data;
 
+		ArrayList<String> answers = fbData.getAnswers();
+		ArrayList<Integer> votes = fbData.getVotes();
+
+		System.out.println("Vertical boxes, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
+
+		for(int i = boxes.size(); i<answers.size(); i++){
+			boxes.add(new GraphBox(answers.get(i)));
+			System.out.println("Added box");
+		}
+
 		//Add data to boxes
-		boxes.get(0).update((int) (fbData.getVote3()), fbData.getAlt3());
-		boxes.get(1).update((int) (fbData.getVote2()), fbData.getAlt2());
-		boxes.get(2).update((int) (fbData.getVote1()), fbData.getAlt1());
+		System.out.println("Boxes"+ boxes.size());
+		System.out.println("Answers"+ answers.size());
+		System.out.println("Votes"+ votes.size());
+
+		for(int i = 0; i<answers.size(); i++){
+			boxes.get(i).update((int) (votes.get(i)), answers.get(i));
+			System.out.println("Updated box");
+		}
 
 		//Ugly fix to automatically show the theme when it's launched.
-		myLabel.setText(fbData.getQuestion());
+		myLabel.setText( fbData.getQuestion() );
 		myLabel.setText("");
 
 		repaint();
 	}
 
 	class GraphBox{
-		int votes;
+		int votes = 0;
 		String answer;
 
 		GraphBox(String a){ this.answer = a; }
 		void update(int votes, String answer){ 
 			this.votes = votes;
 			this.answer = answer;
-		
+
 		}
 	}
 }
