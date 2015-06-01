@@ -55,9 +55,9 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		myLabel.setText("");
 		add(myLabel);
 
-			ovals.add(new GraphOval("Loading answer..."));
-			ovals.add(new GraphOval("Loading answer..."));
-			ovals.add(new GraphOval("Loading answer..."));
+//			ovals.add(new GraphOval("Loading answer..."));
+//			ovals.add(new GraphOval("Loading answer..."));
+//			ovals.add(new GraphOval("Loading answer..."));
 
 
 		font = new Font("Roboto", Font.PLAIN, 36);
@@ -115,8 +115,8 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 				double percent = size / allOvalsHeight; //One circle in percent.
 				size = (int) Math.floor(percent*graphHeight); //circle size in percent converted to circle size relative to the max height.
 
-				g2.fillOval((int)(xAlign - (biggestOval/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
-				//g2.fillOval((200, 200, 20, 20) (xAlign - (size/2), nextY-size, size, size, this); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
+				g2.fillRect((int)(xAlign - (biggestOval/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
+				g2.fillOval(200, 200, 20, 20); //(xAlign - (size/2), nextY-size, size, size, this); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
 				g2.drawString(oval.answer, (int)(xAlign + (biggestOval/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
 				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestOval/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
