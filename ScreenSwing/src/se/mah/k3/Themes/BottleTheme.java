@@ -53,6 +53,11 @@ import javax.swing.SwingConstants;
    Red.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/red.png")));
    Red.setBounds(417, 393, 88, 50);
    add(Red);
+   
+   JLabel lblNewLabel_1 = new JLabel("");
+   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue2.png")));
+   lblNewLabel_1.setBounds(234, 247, 202, 302);
+   add(lblNewLabel_1);
 
 
    //Rubrik
@@ -113,11 +118,6 @@ import javax.swing.SwingConstants;
    label_2.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/flaska2.png")));
    label_2.setBounds(780, 167, 107, 318);
    add(label_2);
-   
-   JLabel lblNewLabel_1 = new JLabel("");
-   lblNewLabel_1.setIcon(new ImageIcon(BottleTheme.class.getResource("/images/blue2.png")));
-   lblNewLabel_1.setBounds(27, 116, 202, 302);
-   add(lblNewLabel_1);
    
        }
        	
