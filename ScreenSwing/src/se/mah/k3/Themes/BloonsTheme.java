@@ -61,12 +61,12 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		add(myLabel);
 
 		  
-		    ovals.add(new GraphOval(new Color(23,23,23)));
-		    ovals.add(new GraphOval(new Color(24,24,24)));
-		    ovals.add(new GraphOval(new Color(25,25,25)));
-		    ovals.add(new GraphOval(new Color(26,26,26)));
-		    ovals.add(new GraphOval(new Color(27,27,27)));
-		    ovals.add(new GraphOval(new Color(28,28,28)));
+		    ovals.add(new GraphOval(new Color(0,132,120)));
+		    ovals.add(new GraphOval(new Color(1,24,24)));
+		    ovals.add(new GraphOval(new Color(226,25,25)));
+		    ovals.add(new GraphOval(new Color(26,108,26)));
+		    ovals.add(new GraphOval(new Color(27,100,0)));
+		    ovals.add(new GraphOval(new Color(0,28,28)));
 		   
 
 		clouds = Toolkit.getDefaultToolkit().getImage(BloonsTheme.class.getResource("/images/clouds.png"));
@@ -126,9 +126,10 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 				size = (int) Math.floor(percent*graphHeight); //circle size in percent converted to circle size relative to the max height.
 
 				g2.setColor(oval.color);
-				g2.fillOval(xAlign - (size/2), nextY-size, size, size); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
-				g2.drawString(oval.answer, (int)(xAlign + (biggestOval/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
-				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestOval/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
+				g2.fillOval(nextY - (size/2), xAlign-size, size, size); //Draw circle, centered on xAlign with the bottom as origin for the y coordinate.
+//				g2.drawLine( xAlign - (size/2), nextY-size, size, size, this);
+				g2.drawString(oval.answer, (int)(nextY + (biggestOval/2)) + 50 , (xAlign-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest circle
+				g2.drawString((int)Math.floor(percent*100)+"%", (int)((nextY - (biggestOval/2)) - (barOffset - 40)), (xAlign-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
 				nextY -= size; //Subtracts the current circle size, allowing the next circle to be placed on top
 			}
@@ -197,3 +198,5 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		}
 	}
 }
+
+
