@@ -30,6 +30,8 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 	ArrayList<Bottle> bottles = new ArrayList<Bottle>();
 	Image bottle1;
 	Image bottle2;
+	Image bcgr;
+	Image table;
 
 
 
@@ -42,6 +44,8 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 
 		bottle1 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Flaska1.png"));
 		bottle2 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Flaska2.png"));
+		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/bottles.png"));
+		table = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/table.png"));
 
 
 		//Rubrik
@@ -75,7 +79,6 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 			totalVotes += bottle.votes;
 			numOfBottles++;
 		}
-		int bottleDistance = (int) (tableWidth / numOfBottles);
 		
 		int bottleWidth = (int)(283*scale);
 		
