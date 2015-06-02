@@ -115,6 +115,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 		//Bar on left
 		g2.setColor(Color.black);
+		g2.fillRect((int)(xAlign - (biggestOval/2) - barOffset), yFloor-graphHeight, 10, graphHeight);
 		
 		int nextY = yFloor; //Used to draw circles on top of each other. 
 
