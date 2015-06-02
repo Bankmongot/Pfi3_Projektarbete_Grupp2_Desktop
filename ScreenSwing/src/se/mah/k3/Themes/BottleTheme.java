@@ -8,10 +8,12 @@ import se.mah.k3.ThemeInterface;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
@@ -49,7 +51,7 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 		table = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/table.png"));
 
 
-		//Rubrik
+		//Question
 		myLabel = new JLabel("New label");
 		myLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		myLabel.setFont(new Font("Roboto", Font.BOLD, 50));
@@ -63,42 +65,83 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		
+		
+		//Font fontQuestuion = new Font("Roboto", Font.PLAIN, 50);
+		//Font fontAnswer = new Font("Roboto", Font.PLAIN, 30);
+		
 		Graphics2D g2 = (Graphics2D)g; //Create the graphics2D object we'll use for drawing
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti aliasing, mainly for text
 		
 		//Determining window-size on every repaint enables smooth re-scaling
 		Dimension dim = this.getSize();
 		double windowWidth = dim.getWidth();
 		double windowHeight = dim.getHeight();
-		int numOfBottles = 0;
-		int totalVotes = 0;
 		
+		//Set graph width to two thirds of the display
+		double graphWidth = windowWidth-(windowWidth/3);
+		
+		//Calculate scale with 1920z1080 as 1:1
+		double scaleWindow = (windowWidth / 1920);
+		double scale = (graphWidth / 1920);
+		
+		//Set maximum table width to 3/4 of the graph width
+		double tableWidth = graphWidth-(graphWidth / 4);
+		
+		//Loop through bottles to get total amount of votes (and how many bottles there are while we're at it) 
+		int numOfBottles = 0;
+		double totalVotes = 0;
 		for (Bottle bottle : bottles) {
 			totalVotes += bottle.votes;
 			numOfBottles++;
 		}
 		
-		double scale = (windowWidth / 1920);
-		double tableWidth = (windowWidth / 4)*3;
+		//Reduce the table width depending on number of answers. 
 		tableWidth = (tableWidth/6) * numOfBottles; 
-		int xStart = (int) ((windowWidth - tableWidth)/2);
 		
+		//Center the virtual table the bottles are drawn on.
+		int xStart = (int) ((graphWidth - tableWidth)/2);
 		
+		//Calculate where to put bottles for them to be on the table
+		int tableY =  (int)(windowHeight-((graphWidth/1920)*1080)+5);
 		
-		int tableY =  (int)(windowHeight-((windowWidth/1920)*1080)+5);
-		
-		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
-		
-		g2.drawImage(table, 0, tableY, (int) windowWidth, (int)((windowWidth/1920)*1080), this);
-		
+		//Calculate width and height of the bottles in relation to scale. The numbers here are the image dimensions in pixels.
 		int bottleWidth  = (int)(219*scale);
 		int bottleHeight = (int)(709*scale);
 		
+		//Calculate width of each bottle including space between them
 		int spaceBetween = (int) (((tableWidth - (bottleWidth*numOfBottles))/numOfBottles)+bottleWidth);
 		
+		int fontSize = (int) (40*scaleWindow);
+		Font fontAnswer = new Font("Roboto", Font.PLAIN, fontSize);
 		
+		//DRAWING :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+		
+		g2.setFont(fontAnswer);
+		
+		//Draw background image
+		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
+		//Draw table
+		g2.drawImage(table, 0, tableY, (int) graphWidth, (int)((graphWidth/1920)*1080), this);
+		
+		//Drawing loop.
 		int bottleCount = 0;
 		for (Bottle bottle : bottles){
-			g2.drawImage(bottle.image, ((bottleCount*spaceBetween)+xStart), (int)(tableY+(50*scale)), bottleWidth, bottleHeight, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+			if (bottle.votes > 0) {
+				double percent = bottle.votes / totalVotes; //One bar in percent.
+				int barHeight = (int) Math.floor((percent*(bottleHeight/2))-(10*scale)); //Box size in percent converted to box size relative to the max height.
+				
+				int bottomOfBottle = (int)((tableY+(50*scale))+bottleHeight);
+				
+				
+				g2.fillRect((int) (((bottleCount*spaceBetween)+xStart) + (15*scale)), (int)(bottomOfBottle-barHeight-(30*scale)), (int)(bottleWidth-(bottleWidth/8.0)), barHeight);
+			}
+			
+			
+			//Draw bottle
+			g2.drawImage(bottle.image, ((bottleCount*spaceBetween)+xStart), (int)(tableY+(50*scale)), bottleWidth, bottleHeight, this); //Draw bottle, aligned with the table.
+			//Draw text
+			g2.drawString(bottle.answer, (int) graphWidth, (int)((fontSize*1.5)*bottleCount)+tableY); //Answer, aligned by the biggest box
 			bottleCount++;
 		}
 
