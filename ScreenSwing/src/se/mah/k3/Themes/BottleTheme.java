@@ -43,8 +43,8 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 		setPreferredSize(new Dimension(1080,560));
 		setMinimumSize(new Dimension(1080,560));
 
-		bottle1 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Flaska1.png"));
-		bottle2 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Flaska2.png"));
+		bottle1 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/flaska1fin.png"));
+		bottle2 = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/flaska2fin.png"));
 		bcgr = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/bottles.png"));
 		table = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/table.png"));
 
@@ -72,25 +72,33 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 		int numOfBottles = 0;
 		int totalVotes = 0;
 		
-		double scale = (windowWidth / 1920);
-		double tableWidth = (windowWidth / 4)*3;
-		int xStart = (int) ((windowWidth - tableWidth)/2);
-		
 		for (Bottle bottle : bottles) {
 			totalVotes += bottle.votes;
 			numOfBottles++;
 		}
 		
-		int bottleWidth = (int)(283*scale);
+		double scale = (windowWidth / 1920);
+		double tableWidth = (windowWidth / 4)*3;
+		tableWidth = (tableWidth/6) * numOfBottles; 
+		int xStart = (int) ((windowWidth - tableWidth)/2);
 		
-		g2.fillRect(xStart, 500, (int) tableWidth, 10);
+		
+		
+		int tableY =  (int)(windowHeight-((windowWidth/1920)*1080)+5);
+		
+		g2.drawImage(bcgr, 0, 0, (int) windowWidth, (int) windowHeight, this);
+		
+		g2.drawImage(table, 0, tableY, (int) windowWidth, (int)((windowWidth/1920)*1080), this);
+		
+		int bottleWidth  = (int)(219*scale);
+		int bottleHeight = (int)(709*scale);
 		
 		int spaceBetween = (int) (((tableWidth - (bottleWidth*numOfBottles))/numOfBottles)+bottleWidth);
 		
 		
 		int bottleCount = 0;
 		for (Bottle bottle : bottles){
-			g2.drawImage(bottle.image, ((bottleCount*spaceBetween)+xStart), 100, (int)(283*scale), (int)(709*scale), this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+			g2.drawImage(bottle.image, ((bottleCount*spaceBetween)+xStart), (int)(tableY+(50*scale)), bottleWidth, bottleHeight, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
 			bottleCount++;
 		}
 
