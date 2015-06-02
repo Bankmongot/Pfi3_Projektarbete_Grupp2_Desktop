@@ -163,6 +163,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		Graphics2D g2 = (Graphics2D)g; //Create the graphics2D object we'll use for drawing
 
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/NightSkyBackground.png")), 0,0, (int) width, (int) height, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/countmeinlogoLargeTransparent.png")), 10,(int) height-60, 50, 50, null);
 		/* g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-1.png")), (int) (width/8*1-150), 400, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-2.png")), (int) (width/8*2), 250, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-3.png")), (int) (width/8*3-200), 650, 300, 300, null);
