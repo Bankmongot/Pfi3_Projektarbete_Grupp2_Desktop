@@ -3,8 +3,6 @@ package se.mah.k3.Themes;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
@@ -12,35 +10,27 @@ import javax.swing.JPanel;
 
 import se.mah.k3.*;
 
-import com.firebase.client.ChildEventListener;
-import com.firebase.client.DataSnapshot;
-import com.firebase.client.Firebase;
-import com.firebase.client.FirebaseError;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.DropMode;
 
-import java.awt.BorderLayout;
 
 import javax.swing.BoxLayout;
 import java.awt.Component;
 
 
 
-public class CircleTheme extends JPanel implements ThemeInterface{
+public class SplashScreen extends JPanel implements ThemeInterface{
 	private static final long serialVersionUID = 1L;
 	//A vector is like an ArrayList a little bit slower but Thread-safe. This means that it can handle concurrent changes. 
 	Font font = new Font("Avenir next", Font.BOLD, 40);
 	String question = "Dummy";
-	private int frame = 0;
 	
 
 	
 	
-	public CircleTheme() {
+	public SplashScreen() {
 		setBackground(Color.WHITE);
 		setPreferredSize(new Dimension(1920,1080));
 		setMinimumSize(new Dimension(1920,1080));
@@ -52,7 +42,7 @@ public class CircleTheme extends JPanel implements ThemeInterface{
 		
 		JLabel lblImage = new JLabel("");
 		lblImage.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblImage.setIcon(new ImageIcon(CircleTheme.class.getResource("/images/countmeinlogoLarge.png")));
+		lblImage.setIcon(new ImageIcon(SplashScreen.class.getResource("/images/countmeinlogoLarge.png")));
 		lblImage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblImage.setHorizontalAlignment(JLabel.CENTER);
 		panel.add(lblImage);

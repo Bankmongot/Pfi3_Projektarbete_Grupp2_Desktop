@@ -1,6 +1,5 @@
 package se.mah.k3.Themes;
 
-import java.awt.AWTError;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

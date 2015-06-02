@@ -11,11 +11,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import se.mah.k3.Themes.CircleTheme;
-import se.mah.k3.Themes.Havs;
+import se.mah.k3.Themes.BloonsTheme;
+import se.mah.k3.Themes.BottleTheme;
+import se.mah.k3.Themes.IceCreamTheme;
+import se.mah.k3.Themes.SplashScreen;
 import se.mah.k3.Themes.StarTheme;
 import se.mah.k3.Themes.VerticalBoxes;
-
 
 import java.awt.event.KeyEvent;
 
@@ -26,7 +27,9 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 	private boolean inFullScreenMode = false;
 	private int PrevX = 100 ,PrevY = 100 ,PrevWidth = 480,PrevHeight = 640;
 	//private static ThemeInterface tInter;
-	private FireBase fb;
+	
+	@SuppressWarnings("unused")
+	private FireBase fb; //Ignorera varningen, den används visst.
 
 
 	/**
@@ -52,10 +55,10 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 	public static ThemeInterface setUpTheme(String theme){
 		JPanel panel;
 		switch(theme){
-		case "Circles":
+		case "SplashScreen":
 			//Empty all old crap
 			contentPane.removeAll();
-			panel = new CircleTheme();
+			panel = new SplashScreen();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
@@ -68,7 +71,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
-		case "VerticalBoxes":
+		case "Ice cubes":
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new VerticalBoxes();
@@ -76,10 +79,26 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
-		case "Havs":
+		case "Ice cream":
 			//Empty all old crap
 			contentPane.removeAll();
-			panel = new Havs();
+			panel = new IceCreamTheme();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
+			break;
+		case "Bottles":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new BottleTheme();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
+			break;
+		case "Baloons":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new BloonsTheme();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
@@ -87,7 +106,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 		default:
 			//Empty all old crap
 			contentPane.removeAll();
-			panel = new VerticalBoxes();
+			panel = new SplashScreen();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			break;

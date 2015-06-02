@@ -1,6 +1,5 @@
 package se.mah.k3;
 
-import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -11,15 +10,13 @@ import com.firebase.client.FirebaseError;
 
 public class FireBase {
 	private Firebase myFirebaseRef;
-	private String ID; // To do
 	private FirebaseData fbData = new FirebaseData();
-	private HashMap<String, Integer> map = new HashMap<String, Integer>();
 	private String lastTheme = "Circles";
 	private ThemeInterface themeInterface;
 	Timer timer;
 
 	public FireBase() {
-		themeInterface = FullScreen.setUpTheme("Circles"); // Default screen
+		themeInterface = FullScreen.setUpTheme("SplashScreen"); // Default screen
 		myFirebaseRef = new Firebase(
 				"https://popping-torch-1741.firebaseio.com/");
 		myFirebaseRef.removeValue(); // Cleans out everything
@@ -38,10 +35,7 @@ public class FireBase {
 			// A user changed some value so update
 			@Override
 			public void onChildChanged(DataSnapshot arg0, String arg1) {
-				Iterable<DataSnapshot> dsList = arg0.getChildren();
-				// Snapshot is listening for changes, and getting the data.
-				for (DataSnapshot dataSnapshot : dsList) {
-				}
+				
 			}
 
 			// We got a new user
@@ -194,10 +188,7 @@ public class FireBase {
 
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
-				// TODO Auto-generated method stub
-
-				// System.out.println("das " + arg0);
-
+				
 				if (arg0.getKey().equals("Question")) {
 
 					fbData.setQuestion((String) arg0.getValue());
@@ -223,60 +214,72 @@ public class FireBase {
 
 					if (dataSnapshot.getKey().startsWith("1:")) {
 						fbData.setVote1((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 					if (dataSnapshot.getKey().startsWith("2:")) {
 						fbData.setVote2((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().startsWith("3:")) {
 						fbData.setVote3((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 					if (dataSnapshot.getKey().startsWith("4:")) {
 						fbData.setVote4((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().startsWith("5:")) {
 						fbData.setVote5((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().startsWith("6:")) {
 						fbData.setVote6((long) dataSnapshot.getValue());
-						//fbData.addVotes((int) dataSnapshot.getValue());
 					}
 
 					if (dataSnapshot.getKey().startsWith("1:")) {
-						fbData.setAlt1(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt1(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt1((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 					if (dataSnapshot.getKey().startsWith("2:")) {
-						fbData.setAlt2(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt2(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt2((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 					if (dataSnapshot.getKey().startsWith("3:")) {
-						fbData.setAlt3(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt3(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt3((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 					if (dataSnapshot.getKey().startsWith("4:")) {
-						fbData.setAlt4(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt4(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt4((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 					if (dataSnapshot.getKey().startsWith("5:")) {
-						fbData.setAlt5(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt5(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt5((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 					if (dataSnapshot.getKey().startsWith("6:")) {
-						fbData.setAlt6(((String) dataSnapshot.getValue()));
-						//fbData.addAnswer((String) dataSnapshot.getValue());
+						try{
+							fbData.setAlt6(((String) dataSnapshot.getValue()));
+						}catch(Exception ClassCastException){
+							fbData.setAlt6((String.valueOf(dataSnapshot.getValue())));
+						}
 					}
 
 				}
