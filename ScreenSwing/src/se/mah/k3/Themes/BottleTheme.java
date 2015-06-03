@@ -140,10 +140,10 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 		//Calculate width of each bottle including space between them
 		int spaceBetween = (int) (((tableWidth - (bottleWidth*numOfBottles))/numOfBottles)+bottleWidth);
 
-		Font fontTitle  = new Font("Roboto", Font.PLAIN, (int) (50*scaleWindow));
+		Font fontTitle  = new Font("Roboto", Font.BOLD, (int) (50*scaleWindow));
 
 		int fontSize = (int)(40*scaleWindow);
-		Font fontAnswer = new Font("Roboto", Font.PLAIN, fontSize);
+		Font fontAnswer = new Font("Roboto", Font.BOLD, fontSize);
 
 		String question = fbData.getQuestion();
 

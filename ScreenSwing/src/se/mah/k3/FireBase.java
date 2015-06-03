@@ -14,14 +14,14 @@ public class FireBase {
 	private String lastTheme = "Circles";
 	private ThemeInterface themeInterface;
 	Timer timer;
-
+	
 	public FireBase() {
 		themeInterface = FullScreen.setUpTheme("SplashScreen"); // Default screen
 		myFirebaseRef = new Firebase(
 				"https://popping-torch-1741.firebaseio.com/");
 		myFirebaseRef.removeValue(); // Cleans out everything
 		myFirebaseRef.child("ScreenNbr").setValue(145);
-		myFirebaseRef.child("Active").setValue(Constants.falseValue);
+		myFirebaseRef.child("Active").setValue(false);
 
 		myFirebaseRef.addChildEventListener(new ChildEventListener() {
 			@Override
@@ -43,7 +43,7 @@ public class FireBase {
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
 				
 				// SET TIME HERE
-				new Reminder(49990);
+				new Reminder(Constants.surveyLength);
 				getID();
 
 				timer.schedule(new TimerTask() {
@@ -314,10 +314,11 @@ public class FireBase {
 		class RemindTask extends TimerTask {
 			public void run() {
 				myFirebaseRef.child("Active").setValue(false);
-				myFirebaseRef.child(fbData.getActiveID()).child("Active")
+				if(fbData.getActiveID() != null) myFirebaseRef.child(fbData.getActiveID()).child("Active")
 						.setValue(false);
+				fbData = new FirebaseData();
 				System.out.format("Time's up!%n");
-				themeInterface = FullScreen.setUpTheme("Circles");
+				themeInterface = FullScreen.setUpTheme("SplashScreen");
 				timer.cancel(); // Terminate the timer thread
 			}
 		}
