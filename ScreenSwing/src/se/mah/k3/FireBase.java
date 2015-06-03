@@ -41,11 +41,8 @@ public class FireBase {
 			// We got a new user
 			@Override
 			public void onChildAdded(DataSnapshot arg0, String arg1) {
-				// This is called the first when opened so lets add something to
-				// initiate a call to onChildChanged
-
+				
 				// SET TIME HERE
-
 				new Reminder(49990);
 				getID();
 
