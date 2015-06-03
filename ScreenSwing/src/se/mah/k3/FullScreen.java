@@ -13,7 +13,6 @@ import javax.swing.border.EmptyBorder;
 
 import se.mah.k3.Themes.BloonsTheme;
 import se.mah.k3.Themes.BottleTheme;
-import se.mah.k3.Themes.IceCream;
 import se.mah.k3.Themes.SplashScreen;
 import se.mah.k3.Themes.StarTheme;
 import se.mah.k3.Themes.VerticalBoxes;
@@ -92,14 +91,6 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new BloonsTheme();
-			contentPane.add(panel, BorderLayout.CENTER);
-			contentPane.repaint();
-			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
-			break;
-		case "Ice cream":
-			//Empty all old crap
-			contentPane.removeAll();
-			panel = new IceCream();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
