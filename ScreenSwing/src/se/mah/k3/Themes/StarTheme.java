@@ -58,7 +58,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		stars.add(new StarCreate((int) (width/8*7-200), 550));
 		
 		
-		JLabel lblQuestionHere = new JLabel(fbData.getQuestion());
+		JLabel lblQuestionHere = new JLabel("");
 		//JLabel lblQuestionHere = new JLabel("Question?");
 		lblQuestionHere.setBackground(new Color(0, 255, 0));
 		lblQuestionHere.setFont(new Font("Roboto", Font.BOLD, 77));
