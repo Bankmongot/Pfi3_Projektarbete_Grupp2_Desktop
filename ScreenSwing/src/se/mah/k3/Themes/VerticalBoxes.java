@@ -129,7 +129,11 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 		g2.drawString(String.valueOf(totalVotes), (int)(xAlign - (biggestBox/2) - barOffset - 10 - fm.stringWidth(String.valueOf(totalVotes))), yFloor); //Total number of votes
 
 		g2.setFont(font2); //Set the font for the title
-		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
+		FontMetrics metrics = g2.getFontMetrics(font2);
+		int titleWidth = metrics.stringWidth(fbData.getQuestion());
+		int titleXpos = (int)((windowWidth - titleWidth)/2.0);
+		
+		g2.drawString(fbData.getQuestion(), titleXpos, yFloor-graphHeight-70);  //The title
 	}
 
 	@Override
