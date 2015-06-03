@@ -42,6 +42,10 @@ public class StarTheme extends JPanel implements ThemeInterface {
 	List<Integer> ycoord = new ArrayList<Integer>();
 	List<Integer> xcoord = new ArrayList<Integer>();
 	List<StarCreate> stars = new ArrayList<StarCreate>();
+	List<Integer> xanswers = new ArrayList<Integer>();
+	List<StarAnswers> staranswers = new ArrayList<StarAnswers>();
+	
+	Font f1 = new Font ("Roboto", Font.PLAIN, 30);
 	
 	public StarTheme(){
 		setBackground(new Color(0, 0, 51));
@@ -51,13 +55,12 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		setLayout(null);
 		starImage = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Star-1.png"));
 		
-		xcoord.add((int)width/8*1-150);
-		xcoord.add((int)width/8*2);
-		xcoord.add((int)width/8*3-200);
-		xcoord.add((int)width/8*4-200);
-		xcoord.add((int)width/8*5-200);
-		xcoord.add((int)width/8*6-200);
-		xcoord.add((int)width/8*7-200);
+		xcoord.add((int)width/7*1-50);
+		xcoord.add((int)width/7*2);
+		xcoord.add((int)width/7*3-100);
+		xcoord.add((int)width/7*4-100);
+		xcoord.add((int)width/7*5-100);
+		xcoord.add((int)width/7*6-100);
 		
 		ycoord.add(400);
 		ycoord.add(250);
@@ -65,8 +68,15 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		ycoord.add(400);
 		ycoord.add(600);
 		ycoord.add(250);
-		ycoord.add(550);
 
+		xanswers.add((int) (width/7*1-100));
+		xanswers.add((int) (width/7*2-100));
+		xanswers.add((int) (width/7*3-100));
+		xanswers.add((int) (width/7*4-100));
+		xanswers.add((int) (width/7*5-100));
+		xanswers.add((int) (width/7*6-100));
+		
+		
 /*		stars.add(new StarCreate((int) (width/8*1-150), 400));
 		stars.add(new StarCreate((int) (width/8*2), 250));
 		stars.add(new StarCreate((int) (width/8*3-200), 650));
@@ -88,7 +98,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 
 		
 		
-		//JLabel lblAlt1 = new JLabel(fbData.getAlt1());
+		/*//JLabel lblAlt1 = new JLabel(fbData.getAlt1());
 		lblAlt1 = new JLabel("");
 		lblAlt1.setFont(new Font("Roboto", Font.BOLD, 30));
 		lblAlt1.setForeground(Color.WHITE);
@@ -172,7 +182,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		lblResult7.setForeground(Color.WHITE);
 		lblResult7.setFont(new Font("Roboto", Font.BOLD, 15));
 		lblResult7.setBounds((int) (width/8*7-100), 177, 46, 14);
-		add(lblResult7);
+		add(lblResult7);*/
 	}
 	
 	protected void paintComponent(Graphics g) {
@@ -212,6 +222,12 @@ public class StarTheme extends JPanel implements ThemeInterface {
 					}
 			}
 		 
+		 for (StarAnswers StarAnswers : staranswers) {
+			 g2.setFont(f1);
+			 g2.setColor(Color.WHITE);
+			 g2.drawString(StarAnswers.answer, StarAnswers.xPos, StarAnswers.yPos);
+			 }
+		 
       //g.fillRect(0, 0, getWidth(), getHeight());
 		
 	}
@@ -233,6 +249,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		for(int i = stars.size(); i<answers.size(); i++){
 			stars.add(new StarCreate(xcoord.get(i), ycoord.get(i)));
 			System.out.println("Added box");
+			staranswers.add(new StarAnswers (xanswers.get(i), 149, answers.get(i)));
 		}
 		
 		for(int i = 0; i<answers.size(); i++){
@@ -243,7 +260,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		
 
 		lblQuestionHere.setText(fbData.getQuestion());
-		lblAlt1.setText(answers.get(0));
+		/*lblAlt1.setText(answers.get(0));
 		lblResult1.setText(String.valueOf(votes.get(0)));
 		lblAlt2.setText(answers.get(1));
 		lblResult2.setText(String.valueOf(votes.get(1)));
@@ -256,7 +273,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		lblAlt6.setText(answers.get(5));
 		lblResult6.setText(String.valueOf(votes.get(5)));
 		lblAlt7.setText(answers.get(6));
-		lblResult7.setText(String.valueOf(votes.get(6)));
+		lblResult7.setText(String.valueOf(votes.get(6)));*/
 		
 		
 		repaint();
@@ -282,4 +299,15 @@ public class StarTheme extends JPanel implements ThemeInterface {
 
 		}
 
+	class StarAnswers {
+		int xPos;
+		int yPos;
+		String answer;
+		StarAnswers (int xPos, int yPos, String answer){
+			this.answer = answer;
+			this.xPos = xPos;
+			this.yPos = yPos;
+		}
+		
+	}
 }
