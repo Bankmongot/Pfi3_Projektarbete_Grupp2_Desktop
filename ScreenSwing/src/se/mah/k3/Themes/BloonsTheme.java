@@ -83,6 +83,9 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
         images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongDarkBlue.png")));        
         images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongRed.png")));
         images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongOrange.png")));
+        images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongPurple.png")));
+        images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongGreen.png")));
+
         
 
         //Background
@@ -139,24 +142,25 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
         int nextY = yFloor; //Used to draw boxes on top of each other. 
 
-        for (GraphBox box : boxes) {
-            if (box.votes > 0){
-            int size = box.votes; //Box size.
+        for (GraphBox graphBox : boxes) {
+            if (graphBox.votes > 0){
+            int size = graphBox.votes; //Box size.
             double percent = size / allBoxesHeight; //One box in percent.
             size = (int) Math.floor(percent*graphHeight); //Box size in percent converted to box size relative to the max height.
             int bottleCount = 0;
  
-        for (GraphBox bottle : boxes){
-            g2.drawImage(bottle.image, ((bottleCount*xAlign) + nextY - (size/2)), xAlign-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+     
+            g2.drawImage(graphBox.image, ((bottleCount*xAlign) + nextY - (size/2)), xAlign-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
             bottleCount++;
 
-		}
+		
                 g2.fillRect((int)(xAlign - (biggestBox/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
-                g2.drawImage(ballongBlue, nextY - (size/2), xAlign-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
-                g2.drawString(box.answer, (int)(xAlign + (biggestBox/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest box
-                g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
+               // g2.drawImage(ballongBlue, nextY - (size/2), xAlign-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+                g2.drawString(graphBox.answer, (int)(xAlign + (biggestBox/2)) + 50 , (nextY-(size/2)+(fontHeight/2))-5); // Answer, aligned by the biggest box
+              //  g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
 
                 nextY -= size; //Subtracts the current box's size, allowing the next box to be placed on top
+               
         }
        }
 
