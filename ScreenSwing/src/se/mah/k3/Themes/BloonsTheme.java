@@ -83,7 +83,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 
 		offsets.add(-200);
 
-		offsets.add(120);
+		offsets.add(121);
 
 		offsets.add(-140);
 
