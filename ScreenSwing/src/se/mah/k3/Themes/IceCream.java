@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
+import se.mah.k3.Themes.BottleTheme.Bottle;
 
 public class IceCream extends JPanel implements ThemeInterface {
 	
@@ -35,15 +36,25 @@ public class IceCream extends JPanel implements ThemeInterface {
 	Image cone;
 	Image pear;
 	Image sun;
+	Image icbg;
 	
 	JLabel myLabel;
 	
 	List<Flavors> flavors = new ArrayList<Flavors>();
+	List<FlavorThumbs> flavorThumb = new ArrayList<FlavorThumbs>();
+	List<Image> images = new ArrayList<Image>();
+	List<Integer> yCord = new ArrayList<Integer>();
+	List<Integer> thumbYpos = new ArrayList <Integer>();
+	
+	List <Integer> xCord = new ArrayList<Integer>();
 	
 	Font f1 = new Font("Roboto", Font.PLAIN, 36); // Answers
 	Font f2 = new Font ("Roboto", Font.PLAIN, 36); // Question
 	
+	
+	
 	public IceCream(){
+		
 		
 		setLayout(null);
 		setPreferredSize(new Dimension(1920,1080));
@@ -55,16 +66,38 @@ public class IceCream extends JPanel implements ThemeInterface {
 				myLabel.setText("");
 				add(myLabel);
 				
+				
+				// Add X-Coordinates to match the image arrayList.
+				xCord.add(628);
+				xCord.add(740);
+				xCord.add(910);
+				xCord.add(1050);
+				
+			
+				
+				
+				
+				// Add Y-Coordinates to match the image arrayList.
+				yCord.add(690);
+				yCord.add(670);
+				yCord.add(650);
+				yCord.add(680);
+				
+				thumbYpos.add(200);
+				thumbYpos.add(280);
+				thumbYpos.add(360);
+				thumbYpos.add(440);
+				
 				//Load the images declared above.
-				cone = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/icecreamcone.png"));
-				vanilla = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/vanilla.png"));
-				pear = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/pear.png"));
-				chocolate = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/icecreamcone.png"));
-				strawberry = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/strawberry.png"));
+				images.add(Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/vanilla.png")));
+		        images.add(Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/pear.png")));        
+		        images.add(Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/strawberry.png")));
+		        images.add(Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/chocolate.png")));
+		        
+				
 				sun = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/sol.PNG"));
-	
-				flavors.add(new Flavors (pear, 400, 400) );
-				flavors.add(new Flavors (vanilla, 400, 400));
+				icbg = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/realicbg.PNG"));
+				cone = Toolkit.getDefaultToolkit().getImage(IceCream.class.getResource("/resourcesforIceCream/icecreamcone.png"));
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -73,44 +106,62 @@ public class IceCream extends JPanel implements ThemeInterface {
 		Dimension dim = this.getSize();
 		windowWidth = dim.getWidth();
 		windowHeight = dim.getHeight();
+		int numOfFlavors= 0;
+		double totalVotes =0;
+		
+		for (Flavors flavor : flavors) {
+			int votes = flavor.votes;
+			totalVotes += votes;
+			
+		}
 		
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti aliasing, mainly for text
 		g2.setFont(f1);
-		FontMetrics fm = g2.getFontMetrics(); //Needed to figure out size of the text
-		int fontHeight = fm.getAscent(); //Height of font
-		double biggestFlavor = 0.0; //Biggest Flavor needed to align text nicely
-		double allFlavorsHeight = 0.0; //Total height of all the flavors, must be double: using it for division.
-		int totalVotes = 0;
 		
-		//Add size of all boxes to allBoxesHeight and calc totalVotes
-				for (Flavors flavor : flavors) {
-					int votes = flavor.votes;
-					allFlavorsHeight += votes;
-					totalVotes += votes;
-				}
-				//Find the biggest box 
-				for (Flavors flavor : flavors) {
-					int flavorSize = flavor.votes;
-					double tempPercent = flavorSize / allFlavorsHeight;
-					double foo =  (int) Math.floor(tempPercent*graphHeight); 
-					if (foo > biggestFlavor) biggestFlavor = foo;
-				}
-		for (Flavors flavor : flavors) {
-			if(flavor.votes > 0) {
-				int size= flavor.votes;
-				double percent = size / totalVotes;
-				size = (int) Math.floor(percent*300);
-				g2.drawImage(pear, flavor.xPos, flavor.yPos, size, size, this);
-			//	g2.drawString(flavor.answer, x, y);
+		FontMetrics fm = g2.getFontMetrics(); //Needed to figure out size of the text
+		double graphWidth = windowWidth-(windowWidth/3);
+		double scale = (graphWidth / 1920);
+		
+		int flavorHeight = (int)(709*scale);
+		
+		//Draw background
+		g2.drawImage(icbg, 0, 0, (int) windowWidth, (int) windowHeight, this);
+	
+		g2.drawImage(cone,960-312, 867, 623, 213, this); 	// Draw the cone
+		
+		//Drawing loop.
+		int flavorCount = 0;
+		for (Flavors flavor : flavors){
+			if (flavor.votes > 0) {
+				double percent = flavor.votes / totalVotes; //One bar in percent.
+				int flavorSize = (int) Math.floor((percent*(flavorHeight/2))-(10*scale)); //Box size in percent converted to box size relative to the max height.
 				
+				g2.drawImage(flavor.img, flavor.xPos, flavor.yPos, (int)(flavorHeight-(30*scale)), (int)(flavorHeight-(30*scale)), this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+				flavorCount++;
+		
 			}
+		}
+		
+		for (FlavorThumbs flavorThumbs : flavorThumb) {
+			g2.drawImage(flavorThumbs.img, 50, flavorThumbs.yPosi, 30, 30, this);
+		
+		}
+				
+				g2.setFont(f2); //Set the font for the title
+				g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
+				g2.drawString( String.valueOf(totalVotes)+ " Votes", 50, 980); 
+
+				
+				
+			
+				
+				
+			
 			
 		}
-		g2.setFont(f2); //Set the font for the title
-		g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
-		
-	}
+	
+	
 	
 	@Override
 	public void updateData(FirebaseData data) {
@@ -122,9 +173,11 @@ public class IceCream extends JPanel implements ThemeInterface {
 		System.out.println("Ice Cream, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
 
 		for(int i = flavors.size(); i<answers.size(); i++){
-			flavors.add(new Flavors(answers.get(i)));
-			System.out.println("Added flavor");
+			flavors.add(new Flavors(images.get(i),xCord.get(i), yCord.get(i)));
+			flavorThumb.add(new FlavorThumbs(images.get(i), 50, thumbYpos.get(i)));
+			System.out.println("Added box");
 		}
+		
 
 		//Add data to boxes
 		System.out.println("Boxes"+ flavors.size());
@@ -149,26 +202,36 @@ public class IceCream extends JPanel implements ThemeInterface {
 	class Flavors {
 		int votes = 0;
 		String answer;
-		int xPos = 0;
-		int yPos = 0;
 		Image img;
-		Flavors (String a) { this.answer = a; }
+		int xPos;
+		int yPos;
+	
 		
 		Flavors (Image img, int xPos, int yPos) {
+			this.img = img;
 			this.xPos = xPos;
 			this.yPos = yPos;
-			this.img = img;
 		}
 		void update (int votes, String answer) {
 			this.votes = votes;
 			this.answer = answer;
-			this.xPos =xPos;
-			this.yPos = yPos;
+		
 			
 			
 		}
 	}
+	
+	class FlavorThumbs {
+		Image img;
+		int xPos;
+		int yPosi;
+		 
+		FlavorThumbs (Image img, int xPos, int yPosi) {
+			this.img = img;
+			this.xPos = xPos;
+			this.yPosi = yPosi;
+		}
+		
+	}
 
-
-
-}
+	}

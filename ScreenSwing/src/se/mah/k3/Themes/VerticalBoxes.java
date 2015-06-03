@@ -51,7 +51,7 @@ public class VerticalBoxes extends JPanel implements ThemeInterface {
 
 		//Needed for ugly fix, displaying the graph instantly when a survey is started.
 		myLabel = new JLabel("New label");
-		myLabel.setBounds(161, 224, 207, 16);
+		myLabel.setBounds(10, 50, 207, 16);
 		myLabel.setText("");
 		add(myLabel);
 

@@ -231,7 +231,7 @@ public class FireBase {
 						fbData.setVote6((long) dataSnapshot.getValue());
 					}
 
-					if (dataSnapshot.getKey().startsWith("1:")) {
+					if (dataSnapshot.getKey().equals("Alt1")) {
 						try{
 							fbData.setAlt1(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){
@@ -239,7 +239,7 @@ public class FireBase {
 						}
 					}
 
-					if (dataSnapshot.getKey().startsWith("2:")) {
+					if (dataSnapshot.getKey().equals("Alt2")) {
 						try{
 							fbData.setAlt2(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){
@@ -247,7 +247,7 @@ public class FireBase {
 						}
 					}
 
-					if (dataSnapshot.getKey().startsWith("3:")) {
+					if (dataSnapshot.getKey().equals("Alt3")) {
 						try{
 							fbData.setAlt3(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){
@@ -255,7 +255,7 @@ public class FireBase {
 						}
 					}
 
-					if (dataSnapshot.getKey().startsWith("4:")) {
+					if (dataSnapshot.getKey().equals("Alt4")) {
 						try{
 							fbData.setAlt4(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){
@@ -263,7 +263,7 @@ public class FireBase {
 						}
 					}
 
-					if (dataSnapshot.getKey().startsWith("5:")) {
+					if (dataSnapshot.getKey().equals("Alt5")) {
 						try{
 							fbData.setAlt5(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){
@@ -271,7 +271,7 @@ public class FireBase {
 						}
 					}
 
-					if (dataSnapshot.getKey().startsWith("6:")) {
+					if (dataSnapshot.getKey().equals("Alt6")) {
 						try{
 							fbData.setAlt6(((String) dataSnapshot.getValue()));
 						}catch(Exception ClassCastException){

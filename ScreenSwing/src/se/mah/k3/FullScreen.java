@@ -79,18 +79,14 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
-		case "Ice cream":
-			//Empty all old crap
-			contentPane.removeAll();
-			panel = new IceCream();
-			contentPane.add(panel, BorderLayout.CENTER);
-			contentPane.repaint();
-			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
-			break;
 		case "Bottles":
 			//Empty all old crap
 			contentPane.removeAll();
+<<<<<<< HEAD
+			panel = new IceCream();
+=======
 			panel = new BottleTheme();
+>>>>>>> 0387e21639782852084501a031ae4efb53946a55
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
@@ -99,6 +95,14 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new BloonsTheme();
+			contentPane.add(panel, BorderLayout.CENTER);
+			contentPane.repaint();
+			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
+			break;
+		case "Ice cream":
+			//Empty all old crap
+			contentPane.removeAll();
+			panel = new IceCream();
 			contentPane.add(panel, BorderLayout.CENTER);
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....

@@ -29,7 +29,7 @@ import java.util.List;
 public class StarTheme extends JPanel implements ThemeInterface {
 
 	FirebaseData fbData;
-	JLabel lblQuestionHere, lblAlt1, lblResult1;
+	JLabel lblQuestionHere, lblAlt1, lblResult1,lblAlt2, lblResult2,lblAlt3, lblResult3,lblAlt4, lblResult4,lblAlt5, lblResult5,lblAlt6, lblResult6,lblAlt7, lblResult7;
 	private JTextField txtQuestionHere;
 	
 	List<StarCreate> stars = new ArrayList<StarCreate>();
@@ -47,6 +47,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		System.out.println("Created StarPanel");
 		setLayout(null);
 		starImage = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/Star-1.png"));
+		
 
 		stars.add(new StarCreate((int) (width/8*1-150), 400));
 		stars.add(new StarCreate((int) (width/8*2), 250));
@@ -57,8 +58,8 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		stars.add(new StarCreate((int) (width/8*7-200), 550));
 		
 		
-		//JLabel lblQuestionHere = new JLabel(fbData.getQuestion());
-		JLabel lblQuestionHere = new JLabel("Question?");
+		JLabel lblQuestionHere = new JLabel("");
+		//JLabel lblQuestionHere = new JLabel("Question?");
 		lblQuestionHere.setBackground(new Color(0, 255, 0));
 		lblQuestionHere.setFont(new Font("Roboto", Font.BOLD, 77));
 		lblQuestionHere.setHorizontalAlignment(SwingConstants.CENTER);
@@ -70,7 +71,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		
 		
 		//JLabel lblAlt1 = new JLabel(fbData.getAlt1());
-		JLabel lblAlt1 = new JLabel("Alt1");
+		JLabel lblAlt1 = new JLabel("Alt 1");
 		lblAlt1.setFont(new Font("Roboto", Font.BOLD, 30));
 		lblAlt1.setForeground(Color.WHITE);
 		lblAlt1.setBounds((int) (width/8*1-100), 149, 100, 30);
@@ -162,6 +163,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 		Graphics2D g2 = (Graphics2D)g; //Create the graphics2D object we'll use for drawing
 
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/NightSkyBackground.png")), 0,0, (int) width, (int) height, null);
+		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/countmeinlogoLargeTransparent.png")), 10,(int) height-60, 50, 50, null);
 		/* g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-1.png")), (int) (width/8*1-150), 400, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-2.png")), (int) (width/8*2), 250, 300, 300, null);
 		 g.drawImage(Toolkit.getDefaultToolkit().getImage(StarTheme.class.getResource("/images/Star-3.png")), (int) (width/8*3-200), 650, 300, 300, null);
@@ -199,7 +201,6 @@ public class StarTheme extends JPanel implements ThemeInterface {
 	@Override
 	public void updateData(FirebaseData data) {
 		fbData = data;
-		lblQuestionHere.setText(fbData.getQuestion());
 		
 		ArrayList<String> answers = fbData.getAnswers();
 		ArrayList<Integer> votes = fbData.getVotes();
@@ -214,13 +215,29 @@ public class StarTheme extends JPanel implements ThemeInterface {
 			System.out.println("Updated box");
 		}
 
+		lblQuestionHere.setText(fbData.getQuestion());
+		lblAlt1.setText(answers.get(0));
+		lblResult1.setText(String.valueOf(votes.get(0)));
+		lblAlt2.setText(answers.get(1));
+		lblResult2.setText(String.valueOf(votes.get(1)));
+		lblAlt3.setText(answers.get(2));
+		lblResult3.setText(String.valueOf(votes.get(2)));
+		lblAlt4.setText(answers.get(3));
+		lblResult4.setText(String.valueOf(votes.get(3)));
+		lblAlt5.setText(answers.get(4));
+		lblResult5.setText(String.valueOf(votes.get(4)));
+		lblAlt6.setText(answers.get(5));
+		lblResult6.setText(String.valueOf(votes.get(5)));
+		lblAlt7.setText(answers.get(6));
+		lblResult7.setText(String.valueOf(votes.get(6)));
+		
 		
 		repaint();
 	} 
 	
 	class StarCreate{
 		int votes = 0;
-		String answer;
+		String answer = "answer";
 		int xPos;
 		int yPos;
 
