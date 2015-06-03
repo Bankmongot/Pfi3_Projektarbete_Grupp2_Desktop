@@ -95,7 +95,7 @@ public class FullScreen extends JFrame implements KeyEventDispatcher{
 			contentPane.repaint();
 			contentPane.revalidate(); //This seems to be needed to really repaint a component with graphical objects strange....
 			break;
-		case "IceCream":
+		case "Ice cream":
 			//Empty all old crap
 			contentPane.removeAll();
 			panel = new IceCream();
