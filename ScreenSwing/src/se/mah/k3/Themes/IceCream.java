@@ -1,5 +1,6 @@
 package se.mah.k3.Themes;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -73,17 +74,17 @@ public class IceCream extends JPanel implements ThemeInterface {
 				
 				
 				// Add X-Coordinates to match the image arrayList.
-				xCord.add(588);
-				xCord.add(740);
-				xCord.add(910);
-				xCord.add(930);
+				xCord.add(320);
+				xCord.add(440);
+				xCord.add(560);
+				xCord.add(680);
 				
 				
 				// Add Y-Coordinates to match the image arrayList.
-				yCord.add(690);
-				yCord.add(590);
-				yCord.add(600);
-				yCord.add(640);
+				yCord.add(660);
+				yCord.add(530);
+				yCord.add(650);
+				yCord.add(680);
 				
 				thumbYpos.add(200);
 				thumbYpos.add(280);
@@ -123,14 +124,14 @@ public class IceCream extends JPanel implements ThemeInterface {
 		
 		FontMetrics fm = g2.getFontMetrics(); //Needed to figure out size of the text
 		
-		double scale = (windowWidth / 1920);
+		double scale = (windowWidth / 1280);
 		
-		int flavorHeight = (int)(606*scale);
+		int flavorHeight = (int)(300*scale);
 		
 		//Draw background
 		g2.drawImage(icbg, 0, 0, (int) windowWidth, (int) windowHeight, this);
 	
-		g2.drawImage(cone,960-312, 867, 623, 213, this); 	// Draw the cone
+		g2.drawImage(cone,640-312, 847, 623, 213, this); 	// Draw the cone
 		
 		//Drawing loop.
 		int flavorCount = 0;
@@ -159,6 +160,7 @@ public class IceCream extends JPanel implements ThemeInterface {
 		}
 				
 				g2.setFont(f2); //Set the font for the title
+				//g2.setColor(Color.WHITE);
 				g2.drawString(fbData.getQuestion(), 50, 90);  //The title //TODO: Positioning
 				g2.drawString( String.valueOf(totalVotes)+ " Votes", 50, 980); 
 
@@ -184,6 +186,7 @@ public class IceCream extends JPanel implements ThemeInterface {
 
 		for(int i = flavors.size(); i<answers.size(); i++){
 			flavors.add(new Flavors(images.get(i),xCord.get(i), yCord.get(i)));
+			
 			flavorThumb.add(new FlavorThumbs(images.get(i), 50, thumbYpos.get(i)));
 			flavoranswr.add(new flavorAnswers(answers.get(i), 50, thumbYpos.get(i)));
 		
