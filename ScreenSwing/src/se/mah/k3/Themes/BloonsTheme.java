@@ -1,42 +1,31 @@
 package se.mah.k3.Themes;
 
 import java.awt.Color;
-
 import java.awt.Dimension;
-
 import java.awt.Font;
-
 import java.awt.FontMetrics;
-
 import java.awt.Graphics;
-
 import java.awt.Graphics2D;
-
 import java.awt.Image;
-
 import java.awt.RenderingHints;
-
 import java.awt.Toolkit;
-
 import java.util.ArrayList;
-
 import java.util.HashMap;
-
 import java.util.List;
 
 
 
-import javax.swing.JLabel;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
 
+
 import se.mah.k3.FirebaseData;
-
 import se.mah.k3.ThemeInterface;
-
 import se.mah.k3.Themes.BottleTheme.Bottle;
+import se.mah.k3.Themes.StarTheme.StarCreate;
 
 public class BloonsTheme extends JPanel implements ThemeInterface {
 
@@ -52,6 +41,8 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 	JLabel myLabel;
 	List<GraphBox> boxes = new ArrayList<GraphBox>();
 	List<Image> images = new ArrayList<Image>();
+	List<Integer> offsets = new ArrayList<Integer>();
+
 
 	double windowWidth;
 	double windowHeight;
@@ -64,7 +55,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 	Image ballongPurple;
 	Image clouds;
 
-	Font font  = new Font("Roboto", Font.PLAIN, 25); //Answers
+	Font font  = new Font("Roboto", Font.PLAIN, 20); //Answers
 	Font font2 = new Font("Roboto", Font.PLAIN, 36); //Question
 
 
@@ -86,6 +77,21 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongPurple.png")));
 		images.add(Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/ballongGreen.png")));
 
+		offsets.add(-20);
+		
+		offsets.add(50);
+
+		offsets.add(-200);
+
+		offsets.add(120);
+
+		offsets.add(-140);
+
+		offsets.add(30);
+
+
+
+
 
 
 
@@ -93,8 +99,8 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		//Background
 		clouds = Toolkit.getDefaultToolkit().getImage(VerticalBoxes.class.getResource("/images/clouds.png"));
 
-		font = new Font("Roboto", Font.PLAIN, 36);
-		font2 = new Font("Roboto", Font.PLAIN, 50);
+		font = new Font("Roboto", Font.PLAIN, 20);
+		font2 = new Font("Roboto", Font.PLAIN, 36);
 
 	}
 
@@ -154,13 +160,11 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 				int bottleCount = 0;
 
 
-				g2.drawImage(graphBox.image, ((bottleCount*xAlign) + nextY - (size/2)), xAlign-size, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+				g2.drawImage(graphBox.image, ((bottleCount*xAlign) + nextY - (size/2)), xAlign-size + graphBox.offset, size, size, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
 				bottleCount++;
 
-
-				g2.fillRect((int)(xAlign - (biggestBox/2) - barOffset), nextY-((size+10)/2), 30, 10); //Line on the bar to the left.
-				g2.drawString(graphBox.answer, (int)(nextY) , (xAlign-(size/2)+(fontHeight/2))); // Answer, aligned by the biggest box
-				g2.drawString((int)Math.floor(percent*100)+"%", (int)((xAlign - (biggestBox/2)) - (barOffset - 40)), (nextY-(size/2)+(fontHeight/2))-5); //Votes in %, -||-
+				g2.drawString(graphBox.answer, (int)(nextY -40) , (xAlign-(size/2)+(fontHeight/2) + graphBox.offset)); // Answer, aligned by the biggest box
+				g2.drawString((int)Math.floor(percent*100)+"%", (int)((nextY + 70) - (barOffset - 40)), (xAlign -(size/2)+(fontHeight/2))-5 + + graphBox.offset + 30); //Votes in %, -||-
 
 				nextY -= size; //Subtracts the current box's size, allowing the next box to be placed on top
 
@@ -183,7 +187,7 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		System.out.println("Vertical boxes, updateData(). Data received: " + fbData.getAnswers() + " " + fbData.getVotes());
 
 		for(int i = boxes.size(); i<answers.size(); i++){
-			boxes.add(new GraphBox(images.get(i)));
+			boxes.add(new GraphBox(images.get(i), offsets.get(i)));
 			System.out.println("Added box");
 
 		}
@@ -209,8 +213,13 @@ public class BloonsTheme extends JPanel implements ThemeInterface {
 		int votes = 0;
 		String answer;
 		Image image;
+		
+		int offset;
 
-		GraphBox(Image img){ this.image = img; }
+		GraphBox(Image img, int o){
+			this.image = img;
+			this.offset = o;
+		}
 		void update(int votes, String answer){ 
 			this.votes = votes;
 			this.answer = answer;
