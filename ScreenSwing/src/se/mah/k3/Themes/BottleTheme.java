@@ -115,13 +115,15 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 
 		//Set maximum table width to 3/4 of the graph width
 		double tableWidth = graphWidth-(graphWidth / 4);
-
+		double highestVote = 0.0;
+		
 		//Loop through bottles to get total amount of votes (and how many bottles there are while we're at it) 
 		int numOfBottles = 0;
 		double totalVotes = 0;
 		for (Bottle bottle : bottles) {
 			totalVotes += bottle.votes;
 			numOfBottles++;
+			if(bottle.votes > highestVote) highestVote = bottle.votes;
 		}
 
 		//Reduce the table width depending on number of answers. 
@@ -169,8 +171,9 @@ public class BottleTheme extends JPanel implements ThemeInterface {
 		for (Bottle bottle : bottles){
 
 			if (bottle.votes > 0) {
-				double percent = bottle.votes / totalVotes; //One bar in percent.
-				int barHeight = (int) Math.floor((percent*(bottleHeight-(bottleHeight/3.0)))-(60*scale)); //Box size in percent converted to box size relative to the max height.
+				double percent = bottle.votes / highestVote; //One bar in percent.
+				//int barHeight = (int) Math.floor((percent*(bottleHeight-(bottleHeight/3.0)))-(60*scale)); //Box size in percent converted to box size relative to the max height.
+				int barHeight = (int) (percent*(386*scale)); //Box size in percent converted to box size relative to the max height.
 				int bottomOfBottle = (int)((tableY+(50*scale))+bottleHeight);
 
 				int barXActual = (int) (((bottleCount*spaceBetween)+xStart) + (15*scale));
