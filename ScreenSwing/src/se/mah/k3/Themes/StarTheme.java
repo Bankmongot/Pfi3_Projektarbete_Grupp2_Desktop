@@ -45,7 +45,7 @@ public class StarTheme extends JPanel implements ThemeInterface {
 	List<Integer> xanswers = new ArrayList<Integer>();
 	List<StarAnswers> staranswers = new ArrayList<StarAnswers>();
 	
-	Font f1 = new Font ("Roboto", Font.PLAIN, 30);
+	Font f1 = new Font ("Roboto", Font.BOLD, 30);
 	
 	public StarTheme(){
 		setBackground(new Color(0, 0, 51));
