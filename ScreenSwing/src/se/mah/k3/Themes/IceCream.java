@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 
 import se.mah.k3.FirebaseData;
 import se.mah.k3.ThemeInterface;
+import se.mah.k3.Themes.BottleTheme.Bottle;
 
 public class IceCream extends JPanel implements ThemeInterface {
 	
@@ -25,7 +26,6 @@ public class IceCream extends JPanel implements ThemeInterface {
 	double windowWidth;
 	double windowHeight;
 	int graphHeight = 0;
-	public boolean bool;
 	
 	
 	
@@ -106,42 +106,57 @@ public class IceCream extends JPanel implements ThemeInterface {
 		Dimension dim = this.getSize();
 		windowWidth = dim.getWidth();
 		windowHeight = dim.getHeight();
+		int numOfFlavors= 0;
+		double totalVotes =0;
+		
+		for (Flavors flavor : flavors) {
+			int votes = flavor.votes;
+			totalVotes += votes;
+			
+		}
 		
 		Graphics2D g2 = (Graphics2D)g;
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); //Anti aliasing, mainly for text
 		g2.setFont(f1);
-		int totalVotes = 0;
+		
 		FontMetrics fm = g2.getFontMetrics(); //Needed to figure out size of the text
+		double graphWidth = windowWidth-(windowWidth/3);
+		double scale = (graphWidth / 1920);
 		
+		int flavorHeight = (int)(709*scale);
 		
+		//Draw background
+		g2.drawImage(icbg, 0, 0, (int) windowWidth, (int) windowHeight, this);
+	
+		g2.drawImage(cone,960-312, 867, 623, 213, this); 	// Draw the cone
 		
-				//Draw background
-				g2.drawImage(icbg, 0, 0, (int) windowWidth, (int) windowHeight, this);
-			
-				g2.drawImage(cone,960-312, 867, 623, 213, this); 	// Draw the cone
+		//Drawing loop.
+		int flavorCount = 0;
+		for (Flavors flavor : flavors){
+			if (flavor.votes > 0) {
+				double percent = flavor.votes / totalVotes; //One bar in percent.
+				int flavorSize = (int) Math.floor((percent*(flavorHeight/2))-(10*scale)); //Box size in percent converted to box size relative to the max height.
+				
+				g2.drawImage(flavor.img, flavor.xPos, flavor.yPos, (int)(flavorHeight-(30*scale)), (int)(flavorHeight-(30*scale)), this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
+				flavorCount++;
+		
+			}
+		}
+		
+		for (FlavorThumbs flavorThumbs : flavorThumb) {
+			g2.drawImage(flavorThumbs.img, 50, flavorThumbs.yPosi, 30, 30, this);
+		
+		}
 				
 				g2.setFont(f2); //Set the font for the title
 				g2.drawString(fbData.getQuestion(), 50, 50);  //The title //TODO: Positioning
-				
-				for (Flavors flavor : flavors) {
-					int votes = flavor.votes;
-					totalVotes += votes;
-					
-				}
 				g2.drawString( String.valueOf(totalVotes)+ " Votes", 50, 980); 
 
-			
-				int flavorCount = 0;
-				for (Flavors flavor : flavors) {
-				g2.drawImage(flavor.img, flavor.xPos, flavor.yPos, 300+flavor.votes*2, 300+flavor.votes*2, this); //Draw box, centered on xAlign with the bottom as origin for the y coordinate.
-				flavorCount++;
-			
-				}
 				
-				for (FlavorThumbs flavorThumbs : flavorThumb) {
-					g2.drawImage(flavorThumbs.img, 50, flavorThumbs.yPosi, 30, 30, this);
 				
-				}
+			
+				
+				
 			
 			
 		}
